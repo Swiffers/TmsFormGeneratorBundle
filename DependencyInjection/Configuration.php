@@ -20,9 +20,19 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('tms_form_generator');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->arrayNode('constraints')
+                    ->defaultValue(array())
+                    ->prototype('array')
+                        ->prototype('scalar')->end()
+                    ->end()
+                ->end()
+                ->scalarNode('service')
+                    ->defaultValue('tms_form_generator.generator.default')
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }

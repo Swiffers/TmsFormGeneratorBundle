@@ -1,0 +1,8 @@
+parameters:
+    tms_form_generator.generator.builder.class: Tms\Bundle\FormGeneratorBundle\Generators\FormBuilderGenerator
+
+services:
+    tms_form_generator.generator.default:
+        class:     %tms_form_generator.generator.builder.class%
+        arguments: [ @form.factory, null ]
+        abstract:  true

@@ -4,6 +4,7 @@ namespace Tms\Bundle\FormGeneratorBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
@@ -22,5 +23,21 @@ class TmsFormGeneratorExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yml');
+
+        $userConstraints = array();
+        foreach ( $config['constraints'] as $path => $constraints) {
+            foreach ($constraints as $constraintName) {
+                $userConstraints[$constraintName] = "$path\\$constraintName";
+            }
+        }
+        
+        $serviceDefinition = new DefinitionDecorator($config['service']);
+        $serviceDefinition->isAbstract(false);
+        $serviceDefinition->replaceArgument(1, $userConstraints);
+        $container->setDefinition(
+            'tms_form_generator.builder',
+            $serviceDefinition
+        );
     }
 }
