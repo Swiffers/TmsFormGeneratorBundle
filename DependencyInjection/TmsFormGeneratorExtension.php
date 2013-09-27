@@ -1,6 +1,5 @@
 <?php
-
-namespace Tms\Bundle\OperationClientBundle\DependencyInjection;
+namespace Tms\Bundle\FormGeneratorBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
