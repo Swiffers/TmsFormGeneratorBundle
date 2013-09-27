@@ -1,0 +1,24 @@
+{
+    "name": "tms/form-generator-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony FormGeneratorBundle",
+    "keywords": [],
+    "license": "",
+    "authors": [
+        {
+            "name": "TESSI MARKETING",
+            "email": "contact@tessi.fr",
+            "homepage": "http://www.tessi.fr"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/dependency-injection": ">=2.1,<2.4",
+        "symfony/config": ">=2.1,<2.4"
+    },
+    "autoload": {
+        "psr-0": { "Tms\\Bundle\\FormGeneratorBundle": "" }
+    },
+    "target-dir": "Tms/Bundle/FormGeneratorBundle",
+    "minimum-stability": "dev"
+}
