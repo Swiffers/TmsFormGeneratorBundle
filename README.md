@@ -52,4 +52,4 @@ public function registerBundles()
 Documentation
 -------------
 
-You can do a lot more than that! Check the full [documentation](https://github.com/Tessi-Tms/TmsFormGeneratorBundle/blob/master/Resources/doc/index.md)!``
+You can do a lot more than that! Check the full [documentation](https://github.com/Tessi-Tms/TmsFormGeneratorBundle/blob/master/Resources/doc/index.md)!
