@@ -44,7 +44,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new Tms\Bundle\OperationClientBundle\TmsFormGeneratorBundle(),
+        new Tms\Bundle\FormGeneratorBundle\TmsFormGeneratorBundle(),
     );
 }
 `
