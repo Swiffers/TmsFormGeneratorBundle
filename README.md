@@ -47,7 +47,7 @@ public function registerBundles()
         new Tms\Bundle\FormGeneratorBundle\TmsFormGeneratorBundle(),
     );
 }
-`
+```
 
 Documentation
 -------------
