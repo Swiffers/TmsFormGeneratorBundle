@@ -49,6 +49,19 @@ public function registerBundles()
 }
 ```
 
+### Step 4: Configuration
+
+If you wish to generate form fields, import the bundle configuration in your `app/config.yml`
+
+```yml
+imports:
+    ...
+    - { resource: @TmsFormGeneratorBundle/Resources/config/config.yml }
+```
+
+Now you can use the `form_field` and `form_fields` form type in your form builder.
+
+
 Documentation
 -------------
 
