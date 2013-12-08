@@ -11,19 +11,21 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class FormFieldType extends AbstractType
+class FormFieldTypeChoiceType extends AbstractType
 {
     /**
-     * {@inheritdoc}
+     * @var array
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    private $formFieldTypes;
+
+    /**
+     * Constructor
+     *
+     * @param array $formFieldTypes
+     */
+    public function __construct($formFieldTypes)
     {
-        $builder
-            ->add('name', 'text')
-            ->add('type', 'form_field_type_choice')
-            ->add('parameters', 'textarea')
-            ->add('constraints', 'textarea')
-        ;
+        $this->formFieldTypes = $formFieldTypes;
     }
 
     /**
@@ -32,10 +34,16 @@ class FormFieldType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'attr' => array(
-                'class' => sprintf('tms_form_generator__%s', $this->getName())
-            ),
+            'choices' => $this->formFieldTypes
         ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return 'choice';
     }
 
     /**
@@ -43,6 +51,6 @@ class FormFieldType extends AbstractType
      */
     public function getName()
     {
-        return 'form_field';
+        return 'form_field_type_choice';
     }
 }

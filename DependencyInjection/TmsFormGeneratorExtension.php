@@ -26,12 +26,12 @@ class TmsFormGeneratorExtension extends Extension
         $loader->load('services.yml');
 
         $userConstraints = array();
-        foreach ( $config['constraints'] as $path => $constraints) {
+        foreach ($config['constraints'] as $path => $constraints) {
             foreach ($constraints as $constraintName) {
                 $userConstraints[$constraintName] = "$path\\$constraintName";
             }
         }
-        
+
         $serviceDefinition = new DefinitionDecorator($config['service']);
         $serviceDefinition->isAbstract(false);
         $serviceDefinition->replaceArgument(1, $userConstraints);

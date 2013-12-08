@@ -4,5 +4,21 @@ parameters:
 services:
     tms_form_generator.generator.default:
         class:     %tms_form_generator.generator.builder.class%
-        arguments: [ @form.factory, null ]
+        arguments: [@form.factory, null]
         abstract:  true
+
+    tms_form_generator.form.type.form_field:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldType
+        tags:
+            - { name: form.type, alias: form_field }
+
+    tms_form_generator.form.type.form_fields:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldsType
+        tags:
+            - { name: form.type, alias: form_fields }
+
+    tms_form_generator.form.type.form_field_type_choice:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldTypeChoiceType
+        arguments: [%tms_form_generator.form_field_types%]
+        tags:
+            - { name: form.type, alias: form_field_type_choice }
