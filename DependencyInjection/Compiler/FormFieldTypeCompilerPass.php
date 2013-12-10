@@ -5,6 +5,7 @@ namespace Tms\Bundle\FormGeneratorBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
 
 class FormFieldTypeCompilerPass implements CompilerPassInterface
 {
@@ -13,17 +14,24 @@ class FormFieldTypeCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $formFieldTypes = array();
-        $taggedServices = $container->findTaggedServiceIds('form.type');
-        foreach ($taggedServices as $id => $tagAttributes) {
-            foreach ($tagAttributes as $attributes) {
-                $formFieldTypes[$attributes["alias"]] = $attributes["alias"];
-            }
-        }
+        $formFieldTypes = $container->getParameter('tms_form_generator.form_field_types');
 
-        $container->setParameter(
-            'tms_form_generator.form_field_types',
-            $formFieldTypes
-        );
+        $serviceDefinitionNames = array();
+
+        foreach ($formFieldTypes as $id => $parameters) {
+            $serviceDefinition = new DefinitionDecorator('tms_form_generator.form_field');
+            $serviceDefinitionNames[$id] = sprintf('tms_form_generator.form_field.%s', $id);
+            $parent = null;
+            if ($parameters['parent']) {
+                $parent = new Reference($serviceDefinitionNames[$parameters['parent']]);
+            }
+
+            $serviceDefinition->isAbstract($parameters['abstract']);
+            $serviceDefinition->replaceArgument(0, $parameters['type']);
+            $serviceDefinition->replaceArgument(1, $parent);
+            $serviceDefinition->replaceArgument(2, $parameters['options']);
+
+            $container->setDefinition($serviceDefinitionNames[$id], $serviceDefinition);
+        }
     }
 }

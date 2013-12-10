@@ -52,17 +52,19 @@ class FormFieldsListener implements EventSubscriberInterface
         $form = $event->getForm();
         $data = $event->getData();
 
-        // First remove all rows
-        foreach ($form as $name => $child) {
-            $form->remove($name);
-        }
+        if (isset($data['fields'])) {
+            // First remove all rows
+            foreach ($form as $name => $child) {
+                $form->remove($name);
+            }
 
-        // Then add all rows again in the correct order
-        foreach ($data['fields'] as $k => $value) {
-            $form->add($k+1, $this->type, array_merge(
-                array('data' => $value),
-                $this->options
-            ));
+            // Then add all rows again in the correct order
+            foreach ($data['fields'] as $k => $value) {
+                $form->add($k+1, $this->type, array_merge(
+                    array('data' => $value),
+                    $this->options
+                ));
+            }
         }
     }
 

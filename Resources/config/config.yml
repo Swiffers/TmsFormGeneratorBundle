@@ -2,3 +2,19 @@ twig:
     form:
         resources:
             - 'TmsFormGeneratorBundle:Form:fields.html.twig'
+
+tms_form_generator:
+    form_field_types:
+        form:
+            abstract: true
+            type: form
+            options:
+                - required: {"type": "checkbox"}
+                - disabled: {"type": "checkbox", "options": {"data": false}}
+                - attr: {"type": "text"}
+
+        text:
+            parent: form
+            type: text
+            options:
+                - max_length: {"type": "number"}

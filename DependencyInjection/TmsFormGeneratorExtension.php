@@ -39,5 +39,10 @@ class TmsFormGeneratorExtension extends Extension
             'tms_form_generator.builder',
             $serviceDefinition
         );
+
+        $container->setParameter(
+            'tms_form_generator.form_field_types',
+            $config['form_field_types']
+        );
     }
 }

@@ -25,7 +25,12 @@ class FormFieldTypeChoiceType extends AbstractType
      */
     public function __construct($formFieldTypes)
     {
-        $this->formFieldTypes = $formFieldTypes;
+        foreach($formFieldTypes as $id => $formFieldType) {
+            if ($formFieldType['abstract'] === "false" || !$formFieldType['abstract']) {
+                $alias = isset($formFieldType['alias']) ? $formFieldType['alias'] : $id;
+                $this->formFieldTypes[$id] = $alias;
+            }
+        }
     }
 
     /**
@@ -34,7 +39,7 @@ class FormFieldTypeChoiceType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'choices' => $this->formFieldTypes
+            'choices'     => $this->formFieldTypes
         ));
     }
 
