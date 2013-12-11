@@ -18,7 +18,7 @@ services:
             - { name: form.type, alias: form_fields }
 
     tms_form_generator.form_field:
-        class: Tms\Bundle\FormGeneratorBundle\Form\FieldType\AbstractFormFieldType
+        class: Tms\Bundle\FormGeneratorBundle\Form\FieldType\FormFieldType
         abstract: true
         arguments: [null, null, null]
 

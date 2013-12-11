@@ -35,7 +35,7 @@ class FormBuilderGenerator implements GeneratorInterface
      * @param FormFactoryInterface $formFactory Instance of FormFactory
      * @param array                $constraints User defined constraints
      */
-    public function __construct (FormFactoryInterface $formFactory, array $userConstraints = null)
+    public function __construct(FormFactoryInterface $formFactory, array $userConstraints = null)
     {
         $this->formFactory     = $formFactory;
         $this->userConstraints = is_array($userConstraints) ? $userConstraints : array();
@@ -44,7 +44,7 @@ class FormBuilderGenerator implements GeneratorInterface
     /**
      * {@inheritDoc}
      */
-    public function generate (array $parameters = array())
+    public function generate(array $parameters = array())
     {
         $formBuilder = $this->formFactory->createBuilder();
 
@@ -77,7 +77,7 @@ class FormBuilderGenerator implements GeneratorInterface
      * @param  array      $options Constraint options
      * @return Constraint
      */
-    protected function generateConstraint ($name, array $options = array())
+    protected function generateConstraint($name, array $options = array())
     {
         // First step : Find constraint namespace an class
         $className = $this->findConstraintClassName($name);
@@ -99,7 +99,7 @@ class FormBuilderGenerator implements GeneratorInterface
      * @param  string $name Constraint name
      * @return string
      */
-    protected function findConstraintClassName ($name)
+    protected function findConstraintClassName($name)
     {
         // First step: Search in user-defined constraints
         if (isset($this->userConstraints[$name])) {

@@ -59,6 +59,15 @@ imports:
     - { resource: @TmsFormGeneratorBundle/Resources/config/config.yml }
 ```
 
+and add this in your `app/routing.yml`
+
+```yml
+...
+tms_form_generator:
+    resource: "@TmsFormGeneratorBundle/Controller"
+    type: annotation
+```
+
 Now you can use the `form_field` and `form_fields` form type in your form builder.
 
 

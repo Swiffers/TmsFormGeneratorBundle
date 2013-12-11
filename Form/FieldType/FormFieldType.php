@@ -8,7 +8,7 @@
 namespace Tms\Bundle\FormGeneratorBundle\Form\FieldType;
 
 
-abstract class AbstractFormFieldType
+class FormFieldType
 {
     protected $type;
     protected $parent;
@@ -18,10 +18,10 @@ abstract class AbstractFormFieldType
      * Constructor
      *
      * @param string $type
-     * @param AbstractFormFieldType $parent
+     * @param FormFieldType $parent
      * @param array $options
      */
-    public function __construct($type, AbstractFormFieldType $parent = null, $options = array())
+    public function __construct($type, FormFieldType $parent = null, $options = array())
     {
         $this->type = $type;
         $this->parent = $parent;
@@ -41,13 +41,12 @@ abstract class AbstractFormFieldType
     /**
      * Get Parent
      *
-     * @return AbstractFormFieldType
+     * @return FormFieldType
      */
     public function getParent()
     {
         return $this->parent;
     }
-
 
     /**
      * Get Options
@@ -60,6 +59,25 @@ abstract class AbstractFormFieldType
             return $this->options;
         }
 
-        return array_merge($this->getParent()->getOptions(), $this->options);
+        return array_merge_recursive($this->getParent()->getOptions(), $this->options);
+    }
+
+    /**
+     * Get fields raw
+     *
+     * @return array
+     */
+    public function getFieldsRaw()
+    {
+        $fields = array();
+        foreach($this->getOptions() as $name => $parameters) {
+            $fields[] = array(
+                'name' => $name,
+                'type' => $parameters['type'],
+                'parameters' => isset($parameters['options']) ? $parameters['options'] : array()
+            );
+        }
+
+        return array('fields' => $fields);
     }
 }
