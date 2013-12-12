@@ -9,64 +9,64 @@ tms_form_generator:
             abstract: true
             type: form
             options:
-                required: {"type": "checkbox"}
-                disabled: {"type": "checkbox", "options": {"data": false}}
-                attr: {"type": "text"}
-                label: {"type": "text"}
+                required: {"type": "checkbox", "options": {"required": false}}
+                disabled: {"type": "checkbox", "options": {"required": false, "data": false}}
+                attr: {"type": "text", "options": {"required": false}}
+                label: {"type": "text", "options": {"required": false}}
 
         text:
             parent: form
             type: text
             options:
-                max_length: {"type": "number"}
-                trim: {"type": "checkbox", "options": {"data": true}}
-                read_only: {"type": "checkbox"}
+                max_length: {"type": "number", "options": {"required": false}}
+                trim: {"type": "checkbox", "options": {"required": false, "data": true}}
+                read_only: {"type": "checkbox", "options": {"required": false}}
 
         textarea:
             parent: form
             type: textarea
             options:
-                max_length: {"type": "number"}
-                trim: {"type": "checkbox", "options": {"data": true}}
+                max_length: {"type": "number", "options": {"required": false}}
+                trim: {"type": "checkbox", "options": {"required": false, "data": true}}
 
         email:
             parent: form
             type: email
             options:
-                max_length: {"type": "number"}
-                trim: {"type": "checkbox", "options": {"data": true}}
+                max_length: {"type": "number", "options": {"required": false}}
+                trim: {"type": "checkbox", "options": {"required": false, "data": true}}
 
         integer:
             parent: form
             type: integer
             options:
-                precision: {"type": "number", "options": {"data": 2}}
+                precision: {"type": "number", "options": {"required": false, "data": 2}}
 
         money:
             parent: form
             type: money
             options:
-                currency: {"type": "text", "options": {"data": "EUR"}}
-                precision: {"type": "number", "options": {"data": 2}}
+                currency: {"type": "text", "options": {"required": false, "data": "EUR"}}
+                precision: {"type": "number", "options": {"required": false, "data": 2}}
 
         number:
             parent: form
             type: number
             options:
-                precision: {"type": "number", "options": {"data": 2}}
+                precision: {"type": "number", "options": {"required": false, "data": 2}}
 
         password:
             parent: text
             type: password
             options:
-                always_empty: {"type": "checkbox", "options": {"data": true}}
+                always_empty: {"type": "checkbox", "options": {"required": false, "data": true}}
 
         percent:
             parent: form
             type: percent
             options:
-                type: {"type": "text"}
-                precision: {"type": "number", "options": {"data": 0}}
+                type: {"type": "text", "options": {"required": false}}
+                precision: {"type": "number", "options": {"required": false, "data": 0}}
 
         search:
             parent: text
@@ -76,7 +76,7 @@ tms_form_generator:
             parent: text
             type: url
             options:
-                default_protocol: {"type": "text", "options": {"data": "http"}}
+                default_protocol: {"type": "text", "options": {"required": false, "data": "http"}}
 
         date:
             parent: form
@@ -87,13 +87,13 @@ tms_form_generator:
             parent: date
             type: birthday
             options:
-                years: {"type": "text"}
+                years: {"type": "text", "options": {"required": false}}
 
         checkbox:
             parent: form
             type: checkbox
             options:
-                value: {"type": "text"}
+                value: {"type": "text", "options": {"required": false}}
 
         file:
             parent: form
@@ -103,7 +103,7 @@ tms_form_generator:
             parent: form
             type: radio
             options:
-                value: {"type": "text"}
+                value: {"type": "text", "options": {"required": false}}
 
         hidden:
             parent: form

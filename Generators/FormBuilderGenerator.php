@@ -4,8 +4,10 @@ namespace Tms\Bundle\FormGeneratorBundle\Generators;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Tms\Bundle\FormGeneratorBundle\Exceptions\ConstraintNotFoundException;
-use Tms\Bundle\FormGeneratorBundle\Exceptions\MissingParametersException;
 
 /**
  *  @author Benjamin TARDY <benjamin.tardy@tessi.fr>
@@ -33,7 +35,7 @@ class FormBuilderGenerator implements GeneratorInterface
      * FormGenerator constructor
      * 
      * @param FormFactoryInterface $formFactory Instance of FormFactory
-     * @param array                $constraints User defined constraints
+     * @param array $constraints User defined constraints
      */
     public function __construct(FormFactoryInterface $formFactory, array $userConstraints = null)
     {
@@ -42,32 +44,98 @@ class FormBuilderGenerator implements GeneratorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * setDefaultFormOptions
+     *
+     * @param OptionsResolverInterface $resolver
      */
-    public function generate(array $parameters = array())
+    protected function setDefaultFormOptions(OptionsResolverInterface $resolver)
     {
-        $formBuilder = $this->formFactory->createBuilder();
+        $resolver->setDefaults(array(
+            'fields'  => array(),
+            'name'    => null,
+            'options' => array('csrf_protection' => false)
+        ));
+    }
 
-        if (isset($parameters['fields'])) {
-            foreach ($parameters['fields'] as $field) {
-                if (isset($field['name'], $field['type'])) {
-                    $parameters  = isset($field['parameters'])  ? $field['parameters']  : array();
-                    $constraints = isset($field['constraints']) ? $field['constraints'] : array();
-
-                    foreach ($constraints as $name => $options) {
-                        $options = is_array($options) ? $options : array();
-
-                        $parameters['constraints'][] = $this->generateConstraint($name, $options);
+    /**
+     * setDefaultFieldOptions
+     *
+     * @param OptionsResolverInterface $resolver
+     */
+    protected function setDefaultFieldOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver
+            ->setRequired(array('name', 'type'))
+            ->setDefaults(array(
+                'options' => array(),
+                'constraints' => array()
+            ))
+            ->setNormalizers(array(
+                'options' => function (Options $options, $values) {
+                    if (!$values) {
+                        return array();
                     }
 
-                    $formBuilder->add($field['name'], $field['type'], $parameters);
-                } else {
-                    throw new MissingParametersException('A Field Must have at least a name and a type');
-                }
-            }
+                    foreach ($values as $k => $v) {
+                        if (!is_bool($v) && empty($v)) {
+                            unset($values[$k]);
+                        }
+                    }
+
+                    return $values;
+                },
+                'constraints' => function (Options $options, $values) {
+                    if (!$values) {
+                        return array();
+                    }
+
+                    return $values;
+                },
+            ))
+        ;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function generate(array $options = array())
+    {
+        $resolver = new OptionsResolver();
+        $this->setDefaultFormOptions($resolver);
+        $parameters = $resolver->resolve($options);
+
+        $formBuilder = $this->formFactory->createBuilder(
+            'form',
+            null,
+            $parameters['options']
+        );
+
+        if ($parameters['name']) {
+            $formBuilder = $this->formFactory->createNamedBuilder(
+                $parameters['name'],
+                'form',
+                null,
+                $parameters['options']
+            );
+        }
+
+        foreach ($parameters['fields'] as $field) {
+            $this->generateField($formBuilder, $field);
         }
 
         return $formBuilder;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function generateField(FormBuilderInterface & $formBuilder, array $options = array())
+    {
+        $resolver = new OptionsResolver();
+        $this->setDefaultFieldOptions($resolver);
+        $parameters = $resolver->resolve($options);
+
+        $formBuilder->add($parameters['name'], $parameters['type'], $parameters['options']);
     }
 
     /**

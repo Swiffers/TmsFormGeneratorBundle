@@ -21,7 +21,7 @@ class FormFieldType extends AbstractType
         $builder
             ->add('name', 'text')
             ->add('type', 'form_field_type_choice')
-            ->add('parameters', 'textarea', array(
+            ->add('options', 'json', array(
                 'attr' => array(
                     'class' => 'tms_form_generator_form_field_data'
                 )

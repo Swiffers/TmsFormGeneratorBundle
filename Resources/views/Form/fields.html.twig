@@ -4,6 +4,7 @@
     {% endspaceless %}
 
     <script type="text/javascript">
+        var ajaxLoaderPath = "{{ asset('bundles/tmswebadmintemplate/images/ajax-loader.gif') }}";
         var collectionHolder = $('.tms_form_generator__form_fields');
         var $addFieldLink = $('<a href="#" class="btn btn-default add_field_link">Add field</a>');
         var $newLink = $('<div></div>').append($addFieldLink);
@@ -23,36 +24,45 @@
         });
 
         function initFormFields($fieldFormDiv) {
-            var $input = $fieldFormDiv.find('.tms_form_generator_form_field_data').parent('.inputs');
+            var $data = $fieldFormDiv.find('.tms_form_generator_form_field_data');
             var $formFieldType = $fieldFormDiv.find('.form_field_types');
-            displayFormFields($formFieldType.val(), $input);
+            displayFormFields($formFieldType.val(), $data);
 
             $formFieldType.on('change', function(event) {
                 event.preventDefault();
-                displayFormFields($(this).val(), $input);
+                displayFormFields($(this).val(), $data);
             });
         }
 
-        function displayFormFields(type, $input) {
-            var $data = $input.find('.tms_form_generator_form_field_data');
-            var $container = $input.find('.tms_form_fields');
+        function displayFormFields(type, $data) {
+            var $container = $data.siblings('.tms_form_generator_form_field_container');
             if ($container.length) {
                 $container.empty();
             } else {
-                $container = $('<div class="tms_form_fields"></div>');
-                $input.append($container);
+                $container = $('<div class="tms_form_generator_form_field_container"></div>');
+                $data.parent('.inputs').append($container);
             }
 
+            var $ajaxLoader = $('<img src="'+ajaxLoaderPath+'" />');
+            $container.append($ajaxLoader);
             $data.hide();
+            var id = $data.attr('id');
+            var name = $data.attr('name');
+            var data = $data.val();
+
             var request = $.ajax({
                 url: "{{ path('tms_form_generator_generate_parameters') }}",
                 type: "GET",
-                data: { type: type, data: $data.val() },
+                data: { name: id, type: type, data: data },
                 dataType: "html"
             });
 
             request.done(function(form) {
-                $container.append(form);
+                var fields = $(form).html();
+                var regExp = new RegExp('name="'+id, 'g')
+                fields = fields.replace(regExp, 'name="'+name);
+                $container.append(fields);
+                $ajaxLoader.remove();
             });
 
             request.fail(function(jqXHR, textStatus) {

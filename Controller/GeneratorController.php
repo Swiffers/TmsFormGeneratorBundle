@@ -25,15 +25,21 @@ class GeneratorController extends Controller
      */
     public function generateParametersAction(Request $request)
     {
+        $name = $request->query->get('name');
         $type = $request->query->get('type');
         $data = $request->query->get('data');
 
         $formFieldServiceName = sprintf('tms_form_generator.form_field.%s', $type);
         $formField = $this->get($formFieldServiceName);
 
+        $options = array(
+            'name' => $name,
+            'fields' => $formField->getGenerationOptions()
+        );
+
         $form = $this
             ->get('tms_form_generator.builder')
-            ->generate($formField->getFieldsRaw())
+            ->generate($options)
             ->getForm()
             ->createView()
         ;

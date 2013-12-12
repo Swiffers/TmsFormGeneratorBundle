@@ -63,21 +63,21 @@ class FormFieldType
     }
 
     /**
-     * Get fields raw
+     * Get generation options
      *
      * @return array
      */
-    public function getFieldsRaw()
+    public function getGenerationOptions()
     {
         $fields = array();
         foreach($this->getOptions() as $name => $parameters) {
             $fields[] = array(
                 'name' => $name,
                 'type' => $parameters['type'],
-                'parameters' => isset($parameters['options']) ? $parameters['options'] : array()
+                'options' => isset($parameters['options']) ? $parameters['options'] : array()
             );
         }
 
-        return array('fields' => $fields);
+        return $fields;
     }
 }

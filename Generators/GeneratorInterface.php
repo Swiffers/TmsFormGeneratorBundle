@@ -9,8 +9,8 @@ interface GeneratorInterface
     /**
      * Generate an object
      * 
-     * @param  array  $parameters Parameters used to generate the object
-     * @return mixed              The generated object
+     * @param array $options Options used to generate the form
+     * @return FormBuilderInterface The generated form
      */
-    public function generate(array $parameters = array());
+    public function generate(array $options = array());
 }
