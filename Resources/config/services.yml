@@ -27,3 +27,9 @@ services:
         arguments: [%tms_form_generator.form_field_types%]
         tags:
             - { name: form.type, alias: form_field_type_choice }
+
+    tms_form_generator.form.type.form_field_options:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldOptionsType
+        arguments: [%tms_form_generator.form_field_types%]
+        tags:
+            - { name: form.type, alias: form_field_options }

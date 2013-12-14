@@ -27,14 +27,14 @@ class GeneratorController extends Controller
     {
         $name = $request->query->get('name');
         $type = $request->query->get('type');
-        $data = $request->query->get('data');
+        $data = json_decode(base64_decode($request->query->get('data')), true);
 
         $formFieldServiceName = sprintf('tms_form_generator.form_field.%s', $type);
         $formField = $this->get($formFieldServiceName);
 
         $options = array(
-            'name' => $name,
-            'fields' => $formField->getGenerationOptions()
+            'name'   => $name,
+            'fields' => $formField->getGenerationFields($data),
         );
 
         $form = $this

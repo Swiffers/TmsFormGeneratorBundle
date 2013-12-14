@@ -9,32 +9,33 @@ tms_form_generator:
             abstract: true
             type: form
             options:
-                required: {"type": "checkbox", "options": {"required": false}}
-                disabled: {"type": "checkbox", "options": {"required": false, "data": false}}
-                attr: {"type": "text", "options": {"required": false}}
                 label: {"type": "text", "options": {"required": false}}
+                required: {"type": "switch_checkbox", "options": {"required": false}}
+                disabled: {"type": "switch_checkbox", "options": {"required": false, "data": false}}
+                attr: {"type": "text", "options": {"required": false}}
+                data: {"type": "text", "options": {"required": false}}
 
         text:
             parent: form
             type: text
             options:
                 max_length: {"type": "number", "options": {"required": false}}
-                trim: {"type": "checkbox", "options": {"required": false, "data": true}}
-                read_only: {"type": "checkbox", "options": {"required": false}}
+                trim: {"type": "switch_checkbox", "options": {"required": false, "data": true}}
+                read_only: {"type": "switch_checkbox", "options": {"required": false}}
 
         textarea:
             parent: form
             type: textarea
             options:
                 max_length: {"type": "number", "options": {"required": false}}
-                trim: {"type": "checkbox", "options": {"required": false, "data": true}}
+                trim: {"type": "switch_checkbox", "options": {"required": false, "data": true}}
 
         email:
             parent: form
             type: email
             options:
                 max_length: {"type": "number", "options": {"required": false}}
-                trim: {"type": "checkbox", "options": {"required": false, "data": true}}
+                trim: {"type": "switch_checkbox", "options": {"required": false, "data": true}}
 
         integer:
             parent: form
@@ -59,7 +60,7 @@ tms_form_generator:
             parent: text
             type: password
             options:
-                always_empty: {"type": "checkbox", "options": {"required": false, "data": true}}
+                always_empty: {"type": "switch_checkbox", "options": {"required": false, "data": true}}
 
         percent:
             parent: form

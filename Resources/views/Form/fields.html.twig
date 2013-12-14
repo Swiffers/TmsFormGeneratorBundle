@@ -53,7 +53,7 @@
             var request = $.ajax({
                 url: "{{ path('tms_form_generator_generate_parameters') }}",
                 type: "GET",
-                data: { name: id, type: type, data: data },
+                data: { name: id, type: type, data: btoa(data) },
                 dataType: "html"
             });
 
