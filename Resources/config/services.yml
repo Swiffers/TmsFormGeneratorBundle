@@ -30,6 +30,15 @@ services:
 
     tms_form_generator.form.type.form_field_options:
         class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldOptionsType
-        arguments: [%tms_form_generator.form_field_types%]
         tags:
             - { name: form.type, alias: form_field_options }
+
+    tms_form_generator.form.type.form_field_constraints:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintsType
+        tags:
+            - { name: form.type, alias: form_field_constraints }
+
+    tms_form_generator.form.type.form_field_eligibility:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldEligibilityType
+        tags:
+            - { name: form.type, alias: form_field_eligibility }

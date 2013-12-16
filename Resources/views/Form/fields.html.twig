@@ -21,16 +21,34 @@
                 addFieldFormDeleteLink($(this));
                 initFormFields($(this));
             });
+
         });
 
-        function initFormFields($fieldFormDiv) {
-            var $data = $fieldFormDiv.find('.tms_form_generator_form_field_data');
-            var $formFieldType = $fieldFormDiv.find('.form_field_types');
+        function initFormFields($fieldFormFieldset) {
+            var $data = $fieldFormFieldset.find('.tms_form_generator_form_field_data');
+            var $formFieldType = $fieldFormFieldset.find('.form_field_types');
             displayFormFields($formFieldType.val(), $data);
 
             $formFieldType.on('change', function(event) {
                 event.preventDefault();
                 displayFormFields($(this).val(), $data);
+            });
+
+            var $tab = $('<ul class="nav nav-tabs" id="{{ id }}_form_field_tab"></ul>');
+            var $tabContent = $('<div class="tab-content"></div>');
+
+            $fieldFormFieldset.find('.btn').before($tab);
+            $fieldFormFieldset.find('.btn').before($tabContent);
+            $fieldFormFieldset.find('.totab').each(function() {
+                var $fieldset = $(this).closest('fieldset');
+                var name = $fieldset.find('label').text();
+                var $tabItem = $('<li><a href="#'+$(this).attr('id')+'_container" data-toggle="tab">'+name+'</a></li>');
+                $tab.append($tabItem);
+                var $contentItem = $('<div class="tab-pane" id="'+$(this).attr('id')+'_container"></div>');
+                $fieldset.find('span').remove();
+                $fieldset.detach();
+                $contentItem.append($fieldset);
+                $tabContent.append($contentItem);
             });
         }
 
@@ -72,20 +90,19 @@
 
         function addFieldForm(collectionHolder, $newLink) {
             var prototype = collectionHolder.attr('data-prototype');
-            var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
-            var $newFormDiv = $('<div></div>').append(newForm);
-            $newLink.before($newFormDiv);
-            addFieldFormDeleteLink($newFormDiv);
-            initFormFields($newFormDiv);
+            var $newForm = $(prototype.replace(/__name__/g, collectionHolder.children().length));
+            $newLink.before($newForm);
+            addFieldFormDeleteLink($newForm.find('.tms_form_generator__form_field'));
+            initFormFields($newForm.find('.tms_form_generator__form_field'));
         }
 
-        function addFieldFormDeleteLink($fieldFormDiv) {
-            var $removeFormA = $('<a href="#" class="btn btn-default">Delete field</a>');
-            $fieldFormDiv.append($removeFormA);
+        function addFieldFormDeleteLink($fieldForm) {
+            var $removeFieldsetLink = $('<a href="#" class="btn btn-default">Delete field</a>');
+            $fieldForm.append($removeFieldsetLink);
 
-            $removeFormA.on('click', function(e) {
+            $removeFieldsetLink.on('click', function(e) {
                 e.preventDefault();
-                $fieldFormDiv.remove();
+                $fieldForm.closest('fieldset').remove();
             });
         }
     </script>

@@ -21,12 +21,22 @@ class FormFieldType extends AbstractType
         $builder
             ->add('name', 'text')
             ->add('type', 'form_field_type_choice')
+            ->add('indexed', 'switch_checkbox')
             ->add('options', 'form_field_options', array(
                 'attr' => array(
-                    'class' => 'tms_form_generator_form_field_data'
+                    'class' => 'tms_form_generator_form_field_data totab'
                 )
             ))
-            //->add('constraints', 'textarea')
+            ->add('constraints', 'form_field_constraints', array(
+                'attr' => array(
+                    'class' => 'totab'
+                )
+            ))
+            ->add('eligibility', 'form_field_eligibility', array(
+                'attr' => array(
+                    'class' => 'totab'
+                )
+            ))
         ;
     }
 

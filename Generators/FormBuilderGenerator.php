@@ -67,8 +67,9 @@ class FormBuilderGenerator implements GeneratorInterface
         $resolver
             ->setRequired(array('name', 'type'))
             ->setDefaults(array(
-                'options' => array(),
-                'constraints' => array()
+                'options'     => array(),
+                'constraints' => array(),
+                'indexed'     => false
             ))
             ->setNormalizers(array(
                 'options' => function (Options $options, $values) {
