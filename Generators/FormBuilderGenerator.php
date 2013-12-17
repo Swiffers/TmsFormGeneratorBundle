@@ -16,7 +16,7 @@ class FormBuilderGenerator implements GeneratorInterface
 {
     /**
      * Instance of a form factory
-     * 
+     *
      * @var FormFactoryInterface
      */
     protected $formFactory;
@@ -26,14 +26,14 @@ class FormBuilderGenerator implements GeneratorInterface
      * ex : array(
      *     'NotBlank' => '\Symfony\Component\Validator\Constraints\NotBlank',
      * ):
-     * 
+     *
      * @var array
      */
     protected $userConstraints;
 
     /**
      * FormGenerator constructor
-     * 
+     *
      * @param FormFactoryInterface $formFactory Instance of FormFactory
      * @param array $constraints User defined constraints
      */
@@ -69,6 +69,7 @@ class FormBuilderGenerator implements GeneratorInterface
             ->setDefaults(array(
                 'options'     => array(),
                 'constraints' => array(),
+                'eligibility' => array(),
                 'indexed'     => false
             ))
             ->setNormalizers(array(
@@ -86,6 +87,13 @@ class FormBuilderGenerator implements GeneratorInterface
                     return $values;
                 },
                 'constraints' => function (Options $options, $values) {
+                    if (!$values) {
+                        return array();
+                    }
+
+                    return $values;
+                },
+                'eligibility' => function (Options $options, $values) {
                     if (!$values) {
                         return array();
                     }
@@ -141,7 +149,7 @@ class FormBuilderGenerator implements GeneratorInterface
 
     /**
      * Generate a new Constraint based on the given name and options
-     * 
+     *
      * @param  string     $name    Constraint name
      * @param  array      $options Constraint options
      * @return Constraint
@@ -164,7 +172,7 @@ class FormBuilderGenerator implements GeneratorInterface
 
     /**
      * Find the class namespace of a constraint
-     * 
+     *
      * @param  string $name Constraint name
      * @return string
      */
