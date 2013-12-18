@@ -32,11 +32,6 @@ class FormFieldType extends AbstractType
                     'class' => 'totab'
                 )
             ))
-            ->add('eligibility', 'form_field_eligibility', array(
-                'attr' => array(
-                    'class' => 'totab'
-                )
-            ))
         ;
     }
 

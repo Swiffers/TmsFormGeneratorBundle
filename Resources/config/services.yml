@@ -37,8 +37,3 @@ services:
         class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintsType
         tags:
             - { name: form.type, alias: form_field_constraints }
-
-    tms_form_generator.form.type.form_field_eligibility:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldEligibilityType
-        tags:
-            - { name: form.type, alias: form_field_eligibility }
