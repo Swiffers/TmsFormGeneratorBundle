@@ -39,7 +39,7 @@ class FormFieldsListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SET_DATA => 'preSetData',
+            FormEvents::PRE_SET_DATA => array('preSetData', 10),
             FormEvents::SUBMIT => array('onSubmit', 40)
         );
     }
@@ -52,19 +52,11 @@ class FormFieldsListener implements EventSubscriberInterface
         $form = $event->getForm();
         $data = $event->getData();
 
-        if (isset($data['fields'])) {
-            // First remove all rows
-            foreach ($form as $name => $child) {
-                $form->remove($name);
-            }
-
-            // Then add all rows again in the correct order
-            foreach ($data['fields'] as $k => $value) {
-                $form->add($k+1, $this->type, array_merge(
-                    array('data' => $value),
-                    $this->options
-                ));
-            }
+        if (empty($data)) {
+            $event->setData(array());
+        } else {
+            $data = json_decode($data, true);
+            $event->setData($data['fields']);
         }
     }
 
@@ -73,10 +65,19 @@ class FormFieldsListener implements EventSubscriberInterface
      */
     public function onSubmit(FormEvent $event)
     {
-        $fields = array('fields' => array());
+        $jsonFields = '';
+        $glue = '';
+        $count = 0;
         foreach ($event->getData() as $data) {
-            $fields['fields'][] = $data;
+            if ($count > 0) {
+                $glue = ',';
+            }
+            $jsonFields .= $glue.$data;
+            $count++;
         }
-        $event->setData($fields);
+
+        $event->setData(sprintf('{"fields": [%s]} ',
+            $jsonFields
+        ));
     }
 }

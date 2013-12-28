@@ -10,6 +10,7 @@ namespace Tms\Bundle\FormGeneratorBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Tms\Bundle\FormGeneratorBundle\Form\DataTransformer\SubFormFieldTransformer;
 
 class FormFieldConstraintsType extends AbstractType
 {
@@ -19,6 +20,19 @@ class FormFieldConstraintsType extends AbstractType
     public function getParent()
     {
         return 'textarea';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'required' => false,
+            'attr' => array(
+                'class' => 'tms_form_generator_form_field_constraints totab'
+            ),
+        ));
     }
 
     /**

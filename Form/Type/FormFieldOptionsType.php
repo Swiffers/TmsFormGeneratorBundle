@@ -10,25 +10,29 @@ namespace Tms\Bundle\FormGeneratorBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Tms\Bundle\FormGeneratorBundle\Form\DataTransformer\FormFieldOptionsTransformer;
+use Tms\Bundle\FormGeneratorBundle\Form\DataTransformer\SubFormFieldTransformer;
 
 class FormFieldOptionsType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function getParent()
     {
-        $transformer = new FormFieldOptionsTransformer();
-        $builder->addModelTransformer($transformer);
+        return 'textarea';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return 'textarea';
+        $resolver->setDefaults(array(
+            'required' => false,
+            'attr' => array(
+                'class' => 'tms_form_generator_form_field_options totab'
+            ),
+        ));
     }
 
     /**
