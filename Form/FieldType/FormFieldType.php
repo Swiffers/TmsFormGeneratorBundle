@@ -147,4 +147,16 @@ class FormFieldType
     {
         return (boolean)$value;
     }
+
+    /**
+     * Field type transformer (text)
+     */
+    public static function transformText($value)
+    {
+        if (is_array($value)) {
+            return json_encode($value);
+        }
+
+        return $value;
+    }
 }

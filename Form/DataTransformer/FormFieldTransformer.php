@@ -54,7 +54,42 @@ class FormFieldTransformer implements DataTransformerInterface
             return '';
         }
 
-        return json_encode($out);
+        $reverseTransformed = array();
+        foreach ($out as $k => $v) {
+            // TODO For constraints: if (is_array($v))
+            if ($k === "options") {
+                self::reverseTransformOptions($v);
+            }
+
+            $reverseTransformed[$k] = $v;
+        }
+
+        return json_encode($reverseTransformed);
+    }
+
+    /**
+     * Reverse transform options
+     *
+     * @param array & $options
+     */
+    protected function reverseTransformOptions(array &$options)
+    {
+        foreach ($options as $k => $v) {
+            if(self::isValidJson($v)) {
+                $options[$k] = json_decode($v, true);
+            }
+        }
+    }
+
+    /**
+     * Is valid json
+     *
+     * @param string $toCheck
+     * @return boolean
+     */
+    protected function isValidJson($toCheck)
+    {
+         return !empty($toCheck) && is_string($toCheck) && is_array(json_decode($toCheck, true)) && json_last_error() == 0;
     }
 }
 
