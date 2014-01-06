@@ -48,7 +48,7 @@ class FormFieldType extends AbstractType
     {
         $resolver->setDefaults(array(
             'attr' => array(
-                'class' => sprintf('tms_form_generator__%s', $this->getName())
+                'class' => 'tms_form_generator_form_field'
             ),
             'name_field' => array(
                 'type' => 'text',

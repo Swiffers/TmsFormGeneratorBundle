@@ -86,7 +86,7 @@ function FormFieldManager($container) {
 
     this.$container.append(this.createAddFieldLink());
     var that = this;
-    this.$container.find('.tms_form_generator__form_field').each(function() {
+    this.$container.find('.tms_form_generator_form_field').each(function() {
         $(this).append(that.createDeleteFieldLink());
     });
 }

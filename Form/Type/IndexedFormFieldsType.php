@@ -12,20 +12,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Tms\Bundle\FormGeneratorBundle\Form\EventListener\FormFieldsListener;
 
-class FormFieldsType extends AbstractType
+class IndexedFormFieldsType extends FormFieldsType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $listener = new FormFieldsListener(
-            $options['type'],
-            $options['options']
-        );
-        $builder->addEventSubscriber($listener);
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -35,6 +23,7 @@ class FormFieldsType extends AbstractType
             'type' => 'form_field',
             'options' => array(
                 'required' => false,
+                'add_indexed_field' => true,
             ),
             'allow_add' => true,
             'allow_delete' => true,
@@ -49,16 +38,8 @@ class FormFieldsType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
-    {
-        return 'collection';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
-        return 'form_fields';
+        return 'indexed_form_fields';
     }
 }

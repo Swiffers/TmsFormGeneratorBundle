@@ -17,6 +17,11 @@ services:
         tags:
             - { name: form.type, alias: form_fields }
 
+    tms_form_generator.form.type.indexed_form_fields:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\IndexedFormFieldsType
+        tags:
+            - { name: form.type, alias: indexed_form_fields }
+
     tms_form_generator.form_field:
         class: Tms\Bundle\FormGeneratorBundle\Form\FieldType\FormFieldType
         abstract: true

@@ -31,110 +31,19 @@
             var fieldManager = new FormFieldManager($('#{{ id }}'));
         });
     </script>
+{% endblock %}
 
-{#
+{% block indexed_form_fields_widget %}
+    {% spaceless %}
+        {{ block('collection_widget') }}
+    {% endspaceless %}
+
+    <!-- TODO: include once //-->
+    <script type="text/javascript" src="{{ asset('bundles/tmsformgenerator/js/formField.js') }}"></script>
+
     <script type="text/javascript">
-        var ajaxLoaderPath = "{{ asset('bundles/tmswebadmintemplate/images/ajax-loader.gif') }}";
-        var collectionHolder = $('.tms_form_generator__form_fields');
-        var $addFieldLink = $('<a href="#" class="btn btn-default add_field_link">Add field</a>');
-        var $newLink = $('<div></div>').append($addFieldLink);
-
         jQuery(document).ready(function() {
-            collectionHolder.append($newLink);
-
-            $addFieldLink.on('click', function(e) {
-                e.preventDefault();
-                addFieldForm(collectionHolder, $newLink);
-            });
-
-            collectionHolder.find('.tms_form_generator__form_field').each(function() {
-                addFieldFormDeleteLink($(this));
-                initFormFields($(this));
-            });
-
+            var fieldManager = new FormFieldManager($('#{{ id }}'));
         });
-
-        function initFormFields($fieldFormFieldset) {
-            var $data = $fieldFormFieldset.find('.tms_form_generator_form_field_data');
-            var $formFieldType = $fieldFormFieldset.find('.form_field_types');
-            displayFormFields($formFieldType.val(), $data);
-
-            $formFieldType.on('change', function(event) {
-                event.preventDefault();
-                displayFormFields($(this).val(), $data);
-            });
-
-            var $tab = $('<ul class="nav nav-tabs" id="{{ id }}_form_field_tab"></ul>');
-            var $tabContent = $('<div class="tab-content"></div>');
-
-            $fieldFormFieldset.find('.btn').before($tab);
-            $fieldFormFieldset.find('.btn').before($tabContent);
-            $fieldFormFieldset.find('.totab').each(function() {
-                var $fieldset = $(this).closest('fieldset');
-                var name = $fieldset.find('label').text();
-                var $tabItem = $('<li><a href="#'+$(this).attr('id')+'_container" data-toggle="tab">'+name+'</a></li>');
-                $tab.append($tabItem);
-                var $contentItem = $('<div class="tab-pane" id="'+$(this).attr('id')+'_container"></div>');
-                $fieldset.find('span').remove();
-                $fieldset.detach();
-                $contentItem.append($fieldset);
-                $tabContent.append($contentItem);
-            });
-        }
-
-        function displayFormFields(type, $data) {
-            var $container = $data.siblings('.tms_form_generator_form_field_container');
-            if ($container.length) {
-                $container.empty();
-            } else {
-                $container = $('<div class="tms_form_generator_form_field_container"></div>');
-                $data.parent('.inputs').append($container);
-            }
-
-            var $ajaxLoader = $('<img src="'+ajaxLoaderPath+'" />');
-            $container.append($ajaxLoader);
-            $data.hide();
-            var id = $data.attr('id');
-            var name = $data.attr('name');
-            var data = $data.val();
-
-            var request = $.ajax({
-                url: "{{ path('tms_form_generator_generate_parameters') }}",
-                type: "GET",
-                data: { name: id, type: type, data: btoa(data) },
-                dataType: "html"
-            });
-
-            request.done(function(form) {
-                var fields = $(form).html();
-                var regExp = new RegExp('name="'+id, 'g')
-                fields = fields.replace(regExp, 'name="'+name);
-                $container.append(fields);
-                $ajaxLoader.remove();
-            });
-
-            request.fail(function(jqXHR, textStatus) {
-                alert("Request failed: " + textStatus);
-            });
-        }
-
-        function addFieldForm(collectionHolder, $newLink) {
-            var prototype = collectionHolder.attr('data-prototype');
-            var $newForm = $(prototype.replace(/__name__/g, collectionHolder.children().length));
-            $newLink.before($newForm);
-            addFieldFormDeleteLink($newForm.find('.tms_form_generator__form_field'));
-            initFormFields($newForm.find('.tms_form_generator__form_field'));
-        }
-
-        function addFieldFormDeleteLink($fieldForm) {
-            var $removeFieldsetLink = $('<a href="#" class="btn btn-default">Delete field</a>');
-            $fieldForm.append($removeFieldsetLink);
-
-            $removeFieldsetLink.on('click', function(e) {
-                e.preventDefault();
-                $fieldForm.closest('fieldset').remove();
-            });
-        }
     </script>
-#}
 {% endblock %}
