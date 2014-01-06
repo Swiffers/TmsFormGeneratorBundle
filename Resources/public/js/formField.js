@@ -12,6 +12,11 @@ function FormField($field, ajaxUrl, ajaxLoaderPath) {
 }
 
 FormField.prototype.init = function() {
+
+    if (this.$type.length  == 0) {
+        return false;
+    }
+
     this.displayTab();
     this.loadData(this.$type.val());
 

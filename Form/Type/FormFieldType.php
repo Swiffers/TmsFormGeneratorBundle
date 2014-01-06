@@ -10,6 +10,8 @@ namespace Tms\Bundle\FormGeneratorBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Tms\Bundle\FormGeneratorBundle\Form\DataTransformer\FormFieldTransformer;
 
 class FormFieldType extends AbstractType
@@ -34,11 +36,32 @@ class FormFieldType extends AbstractType
             $builder->add('indexed', 'switch_checkbox');
         }
 
-        $builder
-            ->add('type', 'form_field_type_choice')
-            ->add('options', 'form_field_options')
-            ->add('constraints', 'form_field_constraints')
-        ;
+        if ($options['name_field']['type'] == 'text') {
+            $builder
+                ->add('type', 'form_field_type_choice')
+                ->add('options', 'form_field_options')
+                ->add('constraints', 'form_field_constraints')
+            ;
+        } else {
+            $builder
+                ->add('type', 'hidden')
+                ->add('options', 'hidden')
+                ->add('constraints', 'hidden')
+            ;
+        }
+
+        $configuration = $options['configuration'];
+        $builder->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            function(FormEvent $event) use ($configuration) {
+                $form = $event->getForm();
+                $data = $event->getData();
+                $data['type'] = $configuration[$data['name']]['type'];
+                $data['options'] = $configuration[$data['name']]['options'];
+                $event->setData($data);
+            }
+        );
+
     }
 
     /**
@@ -54,6 +77,7 @@ class FormFieldType extends AbstractType
                 'type' => 'text',
                 'options' => array()
             ),
+            'configuration' => array(),
             'add_indexed_field' => false
         ));
     }

@@ -35,15 +35,6 @@
 
 {% block indexed_form_fields_widget %}
     {% spaceless %}
-        {{ block('collection_widget') }}
+        {{ block('form_fields_widget') }}
     {% endspaceless %}
-
-    <!-- TODO: include once //-->
-    <script type="text/javascript" src="{{ asset('bundles/tmsformgenerator/js/formField.js') }}"></script>
-
-    <script type="text/javascript">
-        jQuery(document).ready(function() {
-            var fieldManager = new FormFieldManager($('#{{ id }}'));
-        });
-    </script>
 {% endblock %}
