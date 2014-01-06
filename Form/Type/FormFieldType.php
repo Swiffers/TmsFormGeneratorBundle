@@ -36,32 +36,33 @@ class FormFieldType extends AbstractType
             $builder->add('indexed', 'switch_checkbox');
         }
 
-        if ($options['name_field']['type'] == 'text') {
-            $builder
-                ->add('type', 'form_field_type_choice')
-                ->add('options', 'form_field_options')
-                ->add('constraints', 'form_field_constraints')
-            ;
-        } else {
+        if ($options['name_field']['type'] == 'choice') {
             $builder
                 ->add('type', 'hidden')
                 ->add('options', 'hidden')
                 ->add('constraints', 'hidden')
             ;
+        } else {
+            $builder
+                ->add('type', 'form_field_type_choice')
+                ->add('options', 'form_field_options')
+                ->add('constraints', 'form_field_constraints')
+            ;
         }
 
-        $configuration = $options['configuration'];
-        $builder->addEventListener(
-            FormEvents::PRE_SUBMIT,
-            function(FormEvent $event) use ($configuration) {
-                $form = $event->getForm();
-                $data = $event->getData();
-                $data['type'] = $configuration[$data['name']]['type'];
-                $data['options'] = $configuration[$data['name']]['options'];
-                $event->setData($data);
-            }
-        );
-
+        if ($options['configuration']) {
+            $configuration = $options['configuration'];
+            $builder->addEventListener(
+                FormEvents::PRE_SUBMIT,
+                function(FormEvent $event) use ($configuration) {
+                    $form = $event->getForm();
+                    $data = $event->getData();
+                    $data['type'] = $configuration[$data['name']]['type'];
+                    $data['options'] = $configuration[$data['name']]['options'];
+                    $event->setData($data);
+                }
+            );
+        }
     }
 
     /**
