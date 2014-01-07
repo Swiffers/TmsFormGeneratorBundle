@@ -13,6 +13,7 @@ tms_form_generator:
                 required: {"type": "switch_checkbox", "options": {"required": false}}
                 disabled: {"type": "switch_checkbox", "options": {"required": false}}
                 data: {"type": "text", "options": {"required": false}}
+                attr: {"type": "text", "options": {"required": false}}
 
         text:
             parent: form
