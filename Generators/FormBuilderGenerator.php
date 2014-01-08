@@ -57,6 +57,11 @@ class FormBuilderGenerator implements GeneratorInterface
         ));
     }
 
+    /**
+     * getBooleanOptions
+     *
+     * @return array
+     */
     public static function getBooleanOptions()
     {
         return array(
