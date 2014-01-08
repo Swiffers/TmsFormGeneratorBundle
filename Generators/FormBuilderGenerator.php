@@ -57,6 +57,20 @@ class FormBuilderGenerator implements GeneratorInterface
         ));
     }
 
+    public static function getBooleanOptions()
+    {
+        return array(
+            'required',
+            'disabled',
+            'trim',
+            'read_only',
+            'always_empty',
+            'expanded',
+            'multiple',
+            'with_seconds'
+        );
+    }
+
     /**
      * setDefaultFieldOptions
      *
@@ -64,6 +78,7 @@ class FormBuilderGenerator implements GeneratorInterface
      */
     protected function setDefaultFieldOptions(OptionsResolverInterface $resolver)
     {
+        $booleanOptions = self::getBooleanOptions();
         $resolver
             ->setRequired(array('name', 'type'))
             ->setDefaults(array(
@@ -73,13 +88,15 @@ class FormBuilderGenerator implements GeneratorInterface
                 'indexed'     => false
             ))
             ->setNormalizers(array(
-                'options' => function (Options $options, $values) {
+                'options' => function (Options $options, $values) use ($booleanOptions) {
                     if (!$values) {
                         return array();
                     }
 
                     foreach ($values as $k => $v) {
-                        if (!is_bool($v) && empty($v)) {
+                        if (in_array($k, $booleanOptions)) {
+                            $values[$k] = (boolean)$v;
+                        } elseif (empty($v)) {
                             unset($values[$k]);
                         }
                     }
