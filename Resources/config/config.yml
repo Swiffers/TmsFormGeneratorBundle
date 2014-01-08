@@ -10,8 +10,8 @@ tms_form_generator:
             type: form
             options:
                 label: {"type": "text", "options": {"required": false}}
-                required: {"type": "switch_checkbox", "options": {"required": false}}
-                disabled: {"type": "switch_checkbox", "options": {"required": false}}
+                required: {"type": "toggle_button", "options": {"required": false}}
+                disabled: {"type": "toggle_button", "options": {"required": false}}
                 data: {"type": "text", "options": {"required": false}}
                 attr: {"type": "text", "options": {"required": false}}
 
@@ -21,8 +21,8 @@ tms_form_generator:
             alias: "Champ de saisie texte"
             options:
                 max_length: {"type": "number", "options": {"required": false}}
-                trim: {"type": "switch_checkbox", "options": {"required": false}}
-                read_only: {"type": "switch_checkbox", "options": {"required": false}}
+                trim: {"type": "toggle_button", "options": {"required": false}}
+                read_only: {"type": "toggle_button", "options": {"required": false}}
 
         textarea:
             parent: form
@@ -30,7 +30,7 @@ tms_form_generator:
             alias: "Zone de saisie texte"
             options:
                 max_length: {"type": "number", "options": {"required": false}}
-                trim: {"type": "switch_checkbox", "options": {"required": false}}
+                trim: {"type": "toggle_button", "options": {"required": false}}
 
         email:
             parent: form
@@ -38,7 +38,7 @@ tms_form_generator:
             alias: "Champ de saisie couriel (email)"
             options:
                 max_length: {"type": "number", "options": {"required": false}}
-                trim: {"type": "switch_checkbox", "options": {"required": false}}
+                trim: {"type": "toggle_button", "options": {"required": false}}
 
         integer:
             parent: form
@@ -67,7 +67,7 @@ tms_form_generator:
             type: password
             alias: "Champ de saisie de mot de passe"
             options:
-                always_empty: {"type": "switch_checkbox", "options": {"required": false}}
+                always_empty: {"type": "toggle_button", "options": {"required": false}}
 
         percent:
             parent: form
@@ -90,8 +90,8 @@ tms_form_generator:
             alias: "Champ de sélection"
             options:
                 choices: {"type": "text", "options": {"required": false}}
-                multiple: {"type": "switch_checkbox", "options": {"required": false}}
-                expanded: {"type": "switch_checkbox", "options": {"required": false}}
+                multiple: {"type": "toggle_button", "options": {"required": false}}
+                expanded: {"type": "toggle_button", "options": {"required": false}}
                 preferred_choices: {"type": "text", "options": {"required": false}}
                 empty_value: {"type": "text", "options": {"required": false}}
 
@@ -115,7 +115,7 @@ tms_form_generator:
             options:
                 widget: {"type": "choice", "options": {"choices": {"choice": "Rend deux (ou trois si with_seconds est à true) listes déroulantes", "text": "Rend deux ou trois champs input texte (heures, minutes, secondes)", "single_text": "Rend un simple input texte"}, "data": "choice"}}
                 input: {"type": "choice", "options": {"choices": {"string": "string", "datetime": "datetime", "array": "array", "timestamp": "timestamp"}, "data": "datetime"}}
-                with_seconds: {"type": "switch_checkbox", "options": {"required": false}}
+                with_seconds: {"type": "toggle_button", "options": {"required": false}}
                 hours: {"type": "text", "options": {"required": false}}
                 minutes: {"type": "text", "options": {"required": false}}
                 seconds: {"type": "text", "options": {"required": false}}
@@ -136,7 +136,7 @@ tms_form_generator:
                 hours: {"type": "text", "options": {"required": false}}
                 minutes: {"type": "text", "options": {"required": false}}
                 seconds: {"type": "text", "options": {"required": false}}
-                with_seconds: {"type": "switch_checkbox", "options": {"required": false}}
+                with_seconds: {"type": "toggle_button", "options": {"required": false}}
                 empty_value: {"type": "text", "options": {"required": false}}
 
         birthday:

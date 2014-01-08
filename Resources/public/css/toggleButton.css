@@ -1,0 +1,39 @@
+.toggle_button {
+    float: left;
+    overflow: auto;
+}
+
+.toggle_button label {
+    display: block;
+    float: left;
+    width: 24px;
+    height: 20px;
+    border: 1px solid #AAA;
+    font-size: 10px;
+    line-height: 18px;
+    text-align: center;
+    color: #CCC;
+    cursor: pointer;
+}
+
+.toggle_button input[value="0"] + label {
+    border-radius: 6px 0 0 6px;
+}
+.toggle_button input[value="0"][type="radio"]:checked + label {
+    background: #888;
+}
+
+.toggle_button input[value="1"] + label {
+    border-radius: 0 6px 6px 0;
+}
+.toggle_button input[value="1"][type="radio"]:checked + label {
+    background: #0088CC;
+}
+
+.toggle_button input[type="radio"]:checked + label {
+    color: #FFF;
+}
+
+.toggle_button input[type="radio"] {
+    display: none;
+}
