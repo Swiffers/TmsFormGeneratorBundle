@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 /**
  * Generator controller.
  *
- * @Route("/form/generator")
+ * @Route("{_locale}/form/generator")
  */
 class GeneratorController extends Controller
 {

@@ -33,7 +33,7 @@ class FormFieldType extends AbstractType
         }
 
         if ($options['add_indexed_field']) {
-            $builder->add('indexed', 'switch_checkbox');
+            $builder->add('indexed', 'toggle_button');
         }
 
         if ($options['name_field']['type'] == 'choice') {
