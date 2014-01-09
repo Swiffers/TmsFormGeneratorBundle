@@ -10,7 +10,6 @@ namespace Tms\Bundle\FormGeneratorBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Tms\Bundle\FormGeneratorBundle\Form\DataTransformer\SubFormFieldTransformer;
 
 class FormFieldConstraintsType extends AbstractType
 {
