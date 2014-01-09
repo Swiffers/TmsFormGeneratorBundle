@@ -1,11 +1,10 @@
 parameters:
-    tms_form_generator.generator.builder.class: Tms\Bundle\FormGeneratorBundle\Generators\FormBuilderGenerator
+    tms_form_generator.form_builder_generator.class: Tms\Bundle\FormGeneratorBundle\Generators\FormBuilderGenerator
 
 services:
-    tms_form_generator.generator.default:
-        class:     %tms_form_generator.generator.builder.class%
-        arguments: [@form.factory, null]
-        abstract:  true
+    tms_form_generator.form_builder_generator:
+        class:     %tms_form_generator.form_builder_generator.class%
+        arguments: [@form.factory, %tms_form_generator.form_field_types%]
 
     tms_form_generator.form_field:
         class: Tms\Bundle\FormGeneratorBundle\Form\FieldType\FormFieldType

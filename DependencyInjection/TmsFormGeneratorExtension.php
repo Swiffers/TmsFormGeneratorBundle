@@ -25,21 +25,6 @@ class TmsFormGeneratorExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $userConstraints = array();
-        foreach ($config['constraints'] as $path => $constraints) {
-            foreach ($constraints as $constraintName) {
-                $userConstraints[$constraintName] = "$path\\$constraintName";
-            }
-        }
-
-        $serviceDefinition = new DefinitionDecorator($config['service']);
-        $serviceDefinition->isAbstract(false);
-        $serviceDefinition->replaceArgument(1, $userConstraints);
-        $container->setDefinition(
-            'tms_form_generator.builder',
-            $serviceDefinition
-        );
-
         $container->setParameter(
             'tms_form_generator.form_field_types',
             $config['form_field_types']

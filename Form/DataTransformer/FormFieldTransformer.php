@@ -56,7 +56,6 @@ class FormFieldTransformer implements DataTransformerInterface
 
         $reverseTransformed = array();
         foreach ($out as $k => $v) {
-            // TODO For constraints: if (is_array($v))
             if ($k === "options") {
                 self::reverseTransformOptions($v);
             }

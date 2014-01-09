@@ -38,7 +38,7 @@ class GeneratorController extends Controller
         );
 
         $form = $this
-            ->get('tms_form_generator.builder')
+            ->get('tms_form_generator.form_builder_generator')
             ->generate($options)
             ->getForm()
             ->createView()

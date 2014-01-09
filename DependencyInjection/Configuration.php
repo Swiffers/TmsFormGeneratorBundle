@@ -22,16 +22,13 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->arrayNode('constraints')
+                ->append($this->addFormFieldTypesNode())
+                ->arrayNode('form_field_constraints')
                     ->defaultValue(array())
                     ->prototype('array')
                         ->prototype('scalar')->end()
                     ->end()
                 ->end()
-                ->scalarNode('service')
-                    ->defaultValue('tms_form_generator.generator.default')
-                ->end()
-                ->append($this->addFormFieldTypesNode())
             ->end()
         ;
 
@@ -48,42 +45,7 @@ class Configuration implements ConfigurationInterface
             ->useAttributeAsKey('id')
             ->prototype('array')
                 ->children()
-                    ->enumNode('type')
-                        ->isRequired()
-                        ->values(array(
-                            'text',
-                            'textarea',
-                            'email',
-                            'integer',
-                            'money',
-                            'number',
-                            'password',
-                            'percent',
-                            'search', 
-                            'url',
-                            'choice',
-                            'entity',
-                            'country',
-                            'language',
-                            'locale',
-                            'timezone',
-                            'currency',
-                            'date',
-                            'datetime',
-                            'time',
-                            'birthday',
-                            'checkbox',
-                            'file',
-                            'radio',
-                            'collection',
-                            'repeated',
-                            'hidden',
-                            'button',
-                            'reset',
-                            'submit',
-                            'form'
-                        ))
-                    ->end()
+                    ->scalarNode('type')->isRequired()->end()
                     ->booleanNode('abstract')->defaultFalse()->end()
                     ->scalarNode('parent')->defaultNull()->end()
                     ->arrayNode('options')
