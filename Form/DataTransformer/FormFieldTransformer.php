@@ -56,6 +56,10 @@ class FormFieldTransformer implements DataTransformerInterface
 
         $reverseTransformed = array();
         foreach ($out as $k => $v) {
+            if ($k === "indexed") {
+                self::reverseTransformIndexed($v);
+            }
+
             if ($k === "options") {
                 self::reverseTransformOptions($v);
             }
@@ -68,6 +72,16 @@ class FormFieldTransformer implements DataTransformerInterface
         }
 
         return json_encode($reverseTransformed);
+    }
+
+    /**
+     * Reverse transform indexed
+     *
+     * @param string & $indexed
+     */
+    protected function reverseTransformIndexed(&$indexed)
+    {
+        $indexed = (boolean)$indexed ? "1" : "0";
     }
 
     /**

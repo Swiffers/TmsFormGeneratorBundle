@@ -162,6 +162,12 @@ tms_form_generator:
             options:
                 choices: {"type": "text", "options": {"required": false}}
 
+        html_text:
+            type: html_text
+            alias: "Texte HTML"
+            options:
+                content: {"type": "textarea", "options": {"required": false}}
+
         hidden:
             parent: form
             type: hidden

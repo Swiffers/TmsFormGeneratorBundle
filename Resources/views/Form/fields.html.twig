@@ -52,3 +52,11 @@
         });
     </script>
 {% endblock %}
+
+{% block html_text_widget %}
+    <div class="html_text">
+        {% spaceless %}
+            {{ content | raw }}
+        {% endspaceless %}
+    </div>
+{% endblock %}

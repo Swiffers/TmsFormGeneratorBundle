@@ -11,6 +11,11 @@ services:
         abstract: true
         arguments: [null, null, null]
 
+    form.type.html_text:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\HtmlTextFormFieldType
+        tags:
+            - { name: form.type, alias: html_text }
+
     form.type.toggle_button:
         class: Tms\Bundle\FormGeneratorBundle\Form\Type\ToggleButtonType
         tags:

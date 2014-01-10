@@ -10,8 +10,6 @@ namespace Tms\Bundle\FormGeneratorBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Tms\Bundle\FormGeneratorBundle\Form\DataTransformer\FormFieldTransformer;
 
 class FormFieldType extends AbstractType
@@ -34,6 +32,8 @@ class FormFieldType extends AbstractType
 
         if ($options['add_indexed_field']) {
             $builder->add('indexed', 'toggle_button');
+        } else {
+            $builder->add('indexed', 'hidden');
         }
 
         if ($options['name_field']['type'] == 'choice') {
@@ -48,20 +48,6 @@ class FormFieldType extends AbstractType
                 ->add('options', 'form_field_options')
                 ->add('constraints', 'form_field_constraints')
             ;
-        }
-
-        if ($options['configuration']) {
-            $configuration = $options['configuration'];
-            $builder->addEventListener(
-                FormEvents::PRE_SUBMIT,
-                function(FormEvent $event) use ($configuration) {
-                    $form = $event->getForm();
-                    $data = $event->getData();
-                    $data['type'] = $configuration[$data['name']]['type'];
-                    $data['options'] = $configuration[$data['name']]['options'];
-                    $event->setData($data);
-                }
-            );
         }
     }
 
@@ -78,7 +64,6 @@ class FormFieldType extends AbstractType
                 'type' => 'text',
                 'options' => array()
             ),
-            'configuration' => array(),
             'add_indexed_field' => false
         ));
     }
