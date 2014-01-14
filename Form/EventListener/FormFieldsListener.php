@@ -59,7 +59,7 @@ class FormFieldsListener implements EventSubscriberInterface
             // Keep the options field in string which is tranform to an array with js
             foreach($data['fields'] as &$dataField) {
                 $dataField['options'] = json_encode($dataField['options']);
-                $dataField['constraints'] = json_encode($dataField['constraints']);
+                //$dataField['constraints'] = json_encode($dataField['constraints']);
             }
             $event->setData($data['fields']);
         }
