@@ -8,7 +8,7 @@ namespace Tms\Bundle\FormGeneratorBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class IMEIValidator extends ConstraintValidator
+class ImeiValidator extends ConstraintValidator
 {
     /**
      * {@inheritDoc}
