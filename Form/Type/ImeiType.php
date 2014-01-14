@@ -25,7 +25,7 @@ class ImeiType extends AbstractType
         $builder
             ->add('tac', 'text', array(
                 'label'      => ' ',
-                'attr'       => array('style' => 'width: 5em;'),
+                'attr'       => array('style' => 'width: 6em;'),
                 'max_length' => 8
             ))
             ->add('snr', 'text', array(
