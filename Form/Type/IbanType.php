@@ -39,7 +39,7 @@ class IbanType extends AbstractType
             ))
             ->add('account_number', 'text', array(
                 'label'      => ' ',
-                'attr'       => array('style' => 'width: 30.5em;'),
+                'attr'       => array('style' => 'width: 18.5em;'),
                 'max_length' => 30
             ))
         ;

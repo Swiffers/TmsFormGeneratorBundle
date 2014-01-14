@@ -10,8 +10,7 @@ namespace Tms\Bundle\FormGeneratorBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Intl\Intl;
-//use Tms\Bundle\FormGeneratorBundle\Form\DataTransformer\ImeiTransformer;
+use Tms\Bundle\FormGeneratorBundle\Form\DataTransformer\ImeiTransformer;
 
 class ImeiType extends AbstractType
 {
@@ -20,23 +19,23 @@ class ImeiType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        //$transformer = new ImeiTransformer();
-        //$builder->addModelTransformer($transformer);
+        $transformer = new ImeiTransformer();
+        $builder->addModelTransformer($transformer);
 
         $builder
             ->add('tac', 'text', array(
                 'label'      => ' ',
-                'attr'       => array('style' => 'width: 8.5em;'),
+                'attr'       => array('style' => 'width: 5em;'),
                 'max_length' => 8
             ))
             ->add('snr', 'text', array(
                 'label'      => ' ',
-                'attr'       => array('style' => 'width: 6.5em;'),
+                'attr'       => array('style' => 'width: 5em;'),
                 'max_length' => 6
             ))
             ->add('ctrl', 'text', array(
                 'label'      => ' ',
-                'attr'       => array('style' => 'width: 1.5em;'),
+                'attr'       => array('style' => 'width: 2em;'),
                 'max_length' => 1
             ))
         ;
