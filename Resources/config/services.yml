@@ -58,3 +58,8 @@ services:
         class: Tms\Bundle\FormGeneratorBundle\Form\Type\IbanType
         tags:
             - { name: form.type, alias: iban }
+
+    form.type.imei:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\ImeiType
+        tags:
+            - { name: form.type, alias: imei }
