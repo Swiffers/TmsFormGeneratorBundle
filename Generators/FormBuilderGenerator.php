@@ -167,7 +167,6 @@ class FormBuilderGenerator implements GeneratorInterface
 
         // TODO: Uncoment this part and work on constraints !
         //$parameters['options']['constraints'] = $parameters['constraints'];
-        $parameters['options']['constraints'] = null;
         $formBuilder->add($parameters['name'], $parameters['type'], $parameters['options']);
     }
 }

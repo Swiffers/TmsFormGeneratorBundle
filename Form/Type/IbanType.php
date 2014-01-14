@@ -34,14 +34,13 @@ class IbanType extends AbstractType
             ))
             ->add('checksum', 'text', array(
                 'label'      => ' ',
-                'attr'       => array('style' => 'width: 2em;'),
+                'attr'       => array('style' => 'width: 2.5em;'),
                 'max_length' => 2
             ))
             ->add('account_number', 'text', array(
                 'label'      => ' ',
-                'attr'       => array('style' => 'width: 30em;'),
-                'max_length' => 30,
-                'pattern'    => "[0-9a-zA-Z]{0-30}"
+                'attr'       => array('style' => 'width: 30.5em;'),
+                'max_length' => 30
             ))
         ;
     }
