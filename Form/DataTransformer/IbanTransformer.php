@@ -21,8 +21,12 @@ class IbanTransformer implements DataTransformerInterface
      */
     public function transform($in)
     {
-        if (null !== $in) {
-            var_dump($in);die('t');
+        if (null !== $in && !is_array($in)) {
+            return array(
+                'country_code'   => substr($in, 0, 2),
+                'checksum'       => substr($in, 2, 2),
+                'account_number' => substr($in, 4)
+            );
         }
 
         return $in;
@@ -36,8 +40,12 @@ class IbanTransformer implements DataTransformerInterface
      */
     public function reverseTransform($out)
     {
-        if (null !== $out) {
-            var_dump($out);die('r');
+        if (null !== $out && is_array($out)) {
+            return sprintf('%s%s%s',
+                $out['country_code'],
+                $out['checksum'],
+                $out['account_number']
+            );
         }
 
         return $out;
