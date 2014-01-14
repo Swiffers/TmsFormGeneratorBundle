@@ -10,6 +10,7 @@ namespace Tms\Bundle\FormGeneratorBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Tms\Bundle\FormGeneratorBundle\Validator\Constraints\Imei;
 use Tms\Bundle\FormGeneratorBundle\Form\DataTransformer\ImeiTransformer;
 
 class ImeiType extends AbstractType
@@ -43,13 +44,13 @@ class ImeiType extends AbstractType
 
     /**
      * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'constraints' => new Iban()
+            'constraints' => new Imei()
         ));
     }
-     */
 
     /**
      * {@inheritdoc}
