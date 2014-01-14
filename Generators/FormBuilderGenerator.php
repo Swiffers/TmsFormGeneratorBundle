@@ -161,7 +161,9 @@ class FormBuilderGenerator implements GeneratorInterface
         $this->setDefaultFieldOptions($resolver);
         $parameters = $resolver->resolve($options);
 
-        $parameters['options']['constraints'] = $parameters['constraints'];
+        // TODO: Uncoment this part and work on constraints !
+        //$parameters['options']['constraints'] = $parameters['constraints'];
+        $parameters['options']['constraints'] = null;
         $formBuilder->add($parameters['name'], $parameters['type'], $parameters['options']);
     }
 }
