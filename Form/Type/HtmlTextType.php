@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class HtmlTextFormFieldType extends AbstractType
+class HtmlTextType extends AbstractType
 {
     /**
      * {@inheritdoc}

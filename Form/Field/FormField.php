@@ -5,10 +5,10 @@
  * @license: MIT
  */
 
-namespace Tms\Bundle\FormGeneratorBundle\Form\FieldType;
+namespace Tms\Bundle\FormGeneratorBundle\Form\Field;
 
 
-class FormFieldType
+class FormField
 {
     protected $type;
     protected $parent;
@@ -18,10 +18,10 @@ class FormFieldType
      * Constructor
      *
      * @param string $type
-     * @param FormFieldType $parent
+     * @param FormField $parent
      * @param array $options
      */
-    public function __construct($type, FormFieldType $parent = null, $options = array())
+    public function __construct($type, FormField $parent = null, $options = array())
     {
         $this->type = $type;
         $this->parent = $parent;
@@ -41,7 +41,7 @@ class FormFieldType
     /**
      * Get Parent
      *
-     * @return FormFieldType
+     * @return FormField
      */
     public function getParent()
     {

@@ -7,19 +7,10 @@ services:
         arguments: [@form.factory, %tms_form_generator.form_field_types%]
 
     tms_form_generator.form_field:
-        class: Tms\Bundle\FormGeneratorBundle\Form\FieldType\FormFieldType
+        class: Tms\Bundle\FormGeneratorBundle\Form\Field\FormField
         abstract: true
         arguments: [null, null, null]
 
-    form.type.html_text:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\HtmlTextFormFieldType
-        tags:
-            - { name: form.type, alias: html_text }
-
-    form.type.toggle_button:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\ToggleButtonType
-        tags:
-            - { name: form.type, alias: toggle_button }
 
     tms_form_generator.form.type.form_field:
         class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldType
@@ -51,3 +42,19 @@ services:
         class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintsType
         tags:
             - { name: form.type, alias: form_field_constraints }
+
+
+    form.type.html_text:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\HtmlTextType
+        tags:
+            - { name: form.type, alias: html_text }
+
+    form.type.toggle_button:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\ToggleButtonType
+        tags:
+            - { name: form.type, alias: toggle_button }
+
+    form.type.iban:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\IbanType
+        tags:
+            - { name: form.type, alias: iban }

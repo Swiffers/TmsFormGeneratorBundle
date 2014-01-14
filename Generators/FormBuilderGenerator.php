@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * @author:  Benjamin TARDY <benjamin.tardy@tessi.fr>
+ * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ * @license: MIT
+ */
+
 namespace Tms\Bundle\FormGeneratorBundle\Generators;
 
 use Symfony\Component\Form\FormBuilderInterface;
@@ -9,9 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Tms\Bundle\FormGeneratorBundle\Exceptions\ConstraintNotFoundException;
 
-/**
- *  @author Benjamin TARDY <benjamin.tardy@tessi.fr>
- */
 class FormBuilderGenerator implements GeneratorInterface
 {
     protected $formFactory;

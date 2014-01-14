@@ -162,6 +162,11 @@ tms_form_generator:
             options:
                 choices: {"type": "text", "options": {"required": false}}
 
+        iban:
+            parent: form
+            type: iban
+            alias: "Champ de saisie IBAN"
+
         html_text:
             type: html_text
             alias: "Texte HTML"
