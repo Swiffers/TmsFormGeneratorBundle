@@ -178,6 +178,28 @@ tms_form_generator:
             options:
                 content: {"type": "textarea", "options": {"required": false}}
 
+        captcha:
+            parent: text
+            type: captcha
+            alias: "Champ de contrôle humain (CAPTCHA)"
+            options:
+                width: {"type": "number", "options": {"required": false, "data": 120}}
+                height: {"type": "number", "options": {"required": false, "data": 40}}
+                length: {"type": "number", "options": {"required": false, "data": 5}}
+                quality: {"type": "number", "options": {"required": false, "data": 15}}
+                charset: {"type": "text", "options": {"required": false, "data": "abcdefhjkmnprstuvwxyz23456789"}}
+                keep_value: {"type": "toggle_button", "options": {"required": false, "data": "1"}}
+                as_file: {"type": "toggle_button", "options": {"required": false}}
+                as_url: {"type": "toggle_button", "options": {"required": false}}
+                invalid_message: {"type": "text", "options": {"required": false, "data": "Bad code value"}}
+                bypass_code: {"type": "text", "options": {"required": false}}
+                whitelist_key: {"type": "text", "options": {"required": false, "data": "captcha_whitelist_key"}}
+                reload: {"type": "toggle_button", "options": {"required": false}}
+                humanity: {"type": "number", "options": {"required": false, "data": 0}}
+                distortion: {"type": "toggle_button", "options": {"required": false, "data": "1"}}
+                max_front_lines: {"type": "number", "options": {"required": false}}
+                interpolation: {"type": "toggle_button", "options": {"required": false}}
+
         hidden:
             parent: form
             type: hidden
