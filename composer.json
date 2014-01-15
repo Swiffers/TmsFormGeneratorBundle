@@ -14,7 +14,8 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/dependency-injection": ">=2.1,<2.4",
-        "symfony/config": ">=2.1,<2.4"
+        "symfony/config": ">=2.1,<2.4",
+        "gregwar/captcha-bundle": "dev-master",
     },
     "autoload": {
         "psr-0": { "Tms\\Bundle\\FormGeneratorBundle": "" }
