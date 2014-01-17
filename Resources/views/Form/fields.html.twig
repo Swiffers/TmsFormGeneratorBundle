@@ -1,16 +1,3 @@
-{% block form_widget %}
-    {% spaceless %}
-    
-        {{ block('form_widget') }}
-
-        {% if help %}
-            <div class="help">
-                {{ help|raw }}
-            </div>
-        {% endif %}
-    {% endspaceless %}
-{% endblock %}
-
 {% block form_field_widget %}
     {% spaceless %}
         {{ block('collection_widget') }}
