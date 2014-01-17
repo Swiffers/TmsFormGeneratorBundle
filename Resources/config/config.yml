@@ -14,6 +14,7 @@ tms_form_generator:
                 disabled: {"type": "toggle_button", "options": {"required": false}}
                 data: {"type": "text", "options": {"required": false}}
                 attr: {"type": "text", "options": {"required": false}}
+                help: {"type": "text", "options": {"required": false}}
 
         text:
             parent: form
@@ -23,6 +24,7 @@ tms_form_generator:
                 max_length: {"type": "number", "options": {"required": false}}
                 trim: {"type": "toggle_button", "options": {"required": false}}
                 read_only: {"type": "toggle_button", "options": {"required": false}}
+                help: {"type": "text", "options": {"required": false}}
 
         regexp:
             parent: text
@@ -30,6 +32,7 @@ tms_form_generator:
             alias: "Champ de saisie texte avec expression régulière"
             options:
                 pattern: {"type": "text", "options": {"required": false}}
+                help: {"type": "text", "options": {"required": false}}
 
         textarea:
             parent: form
@@ -38,11 +41,14 @@ tms_form_generator:
             options:
                 max_length: {"type": "number", "options": {"required": false}}
                 trim: {"type": "toggle_button", "options": {"required": false}}
+                help: {"type": "text", "options": {"required": false}}
 
         email:
             parent: regexp
             type: email
             alias: "Champ de saisie couriel (email)"
+            options:
+                help: {"type": "text", "options": {"required": false}}
 
         url:
             parent: regexp
@@ -50,6 +56,7 @@ tms_form_generator:
             alias: "Champ de saisie adresse URL"
             options:
                 default_protocol: {"type": "choice", "options": {"choices": {"http": "http", "https": "https"}}}
+                help: {"type": "text", "options": {"required": false}}
 
         integer:
             parent: form
@@ -57,6 +64,7 @@ tms_form_generator:
             alias: "Champ de saisie nombre entier"
             options:
                 precision: {"type": "number", "options": {"required": false, "data": 2}}
+                help: {"type": "text", "options": {"required": false}}
 
         money:
             parent: form
@@ -65,6 +73,7 @@ tms_form_generator:
             options:
                 currency: {"type": "text", "options": {"required": false, "data": "EUR"}}
                 precision: {"type": "number", "options": {"required": false, "data": 2}}
+                help: {"type": "text", "options": {"required": false}}
 
         number:
             parent: form
@@ -72,6 +81,7 @@ tms_form_generator:
             alias: "Champ de saisie nombre décimal"
             options:
                 precision: {"type": "number", "options": {"required": false, "data": 2}}
+                help: {"type": "text", "options": {"required": false}}
 
         password:
             parent: text
@@ -79,6 +89,7 @@ tms_form_generator:
             alias: "Champ de saisie de mot de passe"
             options:
                 always_empty: {"type": "toggle_button", "options": {"required": false}}
+                help: {"type": "text", "options": {"required": false}}
 
         percent:
             parent: form
@@ -87,6 +98,7 @@ tms_form_generator:
             options:
                 type: {"type": "text", "options": {"required": false}}
                 precision: {"type": "number", "options": {"required": false, "data": 0}}
+                help: {"type": "text", "options": {"required": false}}
 
         choice:
             parent: form
@@ -98,6 +110,7 @@ tms_form_generator:
                 expanded: {"type": "toggle_button", "options": {"required": false}}
                 preferred_choices: {"type": "text", "options": {"required": false}}
                 empty_value: {"type": "text", "options": {"required": false}}
+                help: {"type": "text", "options": {"required": false}}
 
         date:
             parent: form
@@ -111,6 +124,7 @@ tms_form_generator:
                 months: {"type": "text", "options": {"required": false}}
                 days: {"type": "text", "options": {"required": false}}
                 empty_value: {"type": "text", "options": {"required": false}}
+                help: {"type": "text", "options": {"required": false}}
 
         time:
             parent: form
@@ -124,6 +138,7 @@ tms_form_generator:
                 minutes: {"type": "text", "options": {"required": false}}
                 seconds: {"type": "text", "options": {"required": false}}
                 empty_value: {"type": "text", "options": {"required": false}}
+                help: {"type": "text", "options": {"required": false}}
 
         datetime:
             parent: form
@@ -142,11 +157,14 @@ tms_form_generator:
                 seconds: {"type": "text", "options": {"required": false}}
                 with_seconds: {"type": "toggle_button", "options": {"required": false}}
                 empty_value: {"type": "text", "options": {"required": false}}
+                help: {"type": "text", "options": {"required": false}}
 
         birthday:
             parent: date
             type: birthday
             alias: "Champ de saisie de date d'anniversaire"
+            options:
+                help: {"type": "text", "options": {"required": false}}
 
         checkbox:
             parent: form
@@ -154,6 +172,7 @@ tms_form_generator:
             alias: "Champ de saisie boolean (checkbox)"
             options:
                 value: {"type": "text", "options": {"required": false}}
+                help: {"type": "text", "options": {"required": false}}
 
         toggle_button:
             parent: form
@@ -161,16 +180,21 @@ tms_form_generator:
             alias: "Champ de sélection binaire (Off/On)"
             options:
                 choices: {"type": "text", "options": {"required": false}}
+                help: {"type": "text", "options": {"required": false}}
 
         iban:
             parent: form
             type: iban
             alias: "Champ de saisie IBAN"
+            options:
+                help: {"type": "text", "options": {"required": false}}
 
         imei:
             parent: form
             type: imei
             alias: "Champ de saisie IMEI"
+            options:
+                help: {"type": "text", "options": {"required": false}}
 
         html_text:
             type: html_text
@@ -199,6 +223,7 @@ tms_form_generator:
                 distortion: {"type": "toggle_button", "options": {"required": false, "data": "1"}}
                 max_front_lines: {"type": "number", "options": {"required": false}}
                 interpolation: {"type": "toggle_button", "options": {"required": false}}
+                help: {"type": "text", "options": {"required": false}}
 
         hidden:
             parent: form

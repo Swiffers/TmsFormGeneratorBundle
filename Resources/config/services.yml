@@ -11,6 +11,10 @@ services:
         abstract: true
         arguments: [null, null, null]
 
+    tms_form_generator.form.extension.help:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\Extension\HelpMessageTypeExtension
+        tags:
+          - { name: "form.type_extension", alias: "form" }
 
     tms_form_generator.form.type.form_field:
         class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldType
