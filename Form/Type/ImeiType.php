@@ -10,46 +10,26 @@ namespace Tms\Bundle\FormGeneratorBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Tms\Bundle\FormGeneratorBundle\Validator\Constraints\Imei;
-use Tms\Bundle\FormGeneratorBundle\Form\DataTransformer\ImeiTransformer;
+use Tms\Bundle\FormGeneratorBundle\Validator\Constraints\Luhn;
 
 class ImeiType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $transformer = new ImeiTransformer();
-        $builder->addModelTransformer($transformer);
-
-        $builder
-            ->add('tac', 'text', array(
-                'label'      => ' ',
-                'attr'       => array('style' => 'width: 6em;'),
-                'max_length' => 8
-            ))
-            ->add('snr', 'text', array(
-                'label'      => ' ',
-                'attr'       => array('style' => 'width: 5em;'),
-                'max_length' => 6
-            ))
-            ->add('ctrl', 'text', array(
-                'label'      => ' ',
-                'attr'       => array('style' => 'width: 2em;'),
-                'max_length' => 1
-            ))
-        ;
+        $resolver->setDefaults(array(
+            'constraints' => new Luhn()
+        ));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function getParent()
     {
-        $resolver->setDefaults(array(
-            'constraints' => new Imei()
-        ));
+        return 'text';
     }
 
     /**
