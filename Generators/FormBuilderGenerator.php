@@ -10,6 +10,8 @@ namespace Tms\Bundle\FormGeneratorBundle\Generators;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -128,7 +130,7 @@ class FormBuilderGenerator implements GeneratorInterface
     /**
      * {@inheritDoc}
      */
-    public function generate(array $options = array())
+    public function generate(array $options = array(), $data = array())
     {
         $resolver = new OptionsResolver();
         $this->setDefaultFormOptions($resolver);
@@ -150,6 +152,9 @@ class FormBuilderGenerator implements GeneratorInterface
         }
 
         foreach ($parameters['fields'] as $field) {
+            if (isset($data[$field['name']])) {
+                $field['options']['data'] = $data[$field['name']];
+            }
             $this->generateField($formBuilder, $field);
         }
 
