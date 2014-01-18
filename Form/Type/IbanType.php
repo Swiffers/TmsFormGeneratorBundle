@@ -10,7 +10,6 @@ namespace Tms\Bundle\FormGeneratorBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Intl\Intl;
 use Symfony\Component\Validator\Constraints\Iban;
 use Tms\Bundle\FormGeneratorBundle\Form\DataTransformer\IbanTransformer;
 
@@ -25,22 +24,40 @@ class IbanType extends AbstractType
         $builder->addModelTransformer($transformer);
 
         $builder
-            ->add('country_code', 'choice', array(
+            ->add('c1', 'text', array(
                 'label'      => ' ',
-                'choices'    => array_combine(
-                    array_keys(Intl::getRegionBundle()->getCountryNames()),
-                    array_keys(Intl::getRegionBundle()->getCountryNames())
-                )
+                'attr'       => array('style' => 'width: 4em;'),
+                'max_length' => 4
             ))
-            ->add('checksum', 'text', array(
+            ->add('c2', 'text', array(
                 'label'      => ' ',
-                'attr'       => array('style' => 'width: 2.5em;'),
-                'max_length' => 2
+                'attr'       => array('style' => 'width: 4em;'),
+                'max_length' => 4
             ))
-            ->add('account_number', 'text', array(
+            ->add('c3', 'text', array(
                 'label'      => ' ',
-                'attr'       => array('style' => 'width: 18.5em;'),
-                'max_length' => 30
+                'attr'       => array('style' => 'width: 4em;'),
+                'max_length' => 4
+            ))
+            ->add('c4', 'text', array(
+                'label'      => ' ',
+                'attr'       => array('style' => 'width: 4em;'),
+                'max_length' => 4
+            ))
+            ->add('c5', 'text', array(
+                'label'      => ' ',
+                'attr'       => array('style' => 'width: 4em;'),
+                'max_length' => 4
+            ))
+            ->add('c6', 'text', array(
+                'label'      => ' ',
+                'attr'       => array('style' => 'width: 4em;'),
+                'max_length' => 4
+            ))
+            ->add('c7', 'text', array(
+                'label'      => ' ',
+                'attr'       => array('style' => 'width: 10em;'),
+                'max_length' => 10
             ))
         ;
     }
