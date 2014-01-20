@@ -55,6 +55,10 @@
     </script>
 {% endblock %}
 
+{% block html_text_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+
 {% block html_text_widget %}
     <div class="html_text">
         {% spaceless %}
