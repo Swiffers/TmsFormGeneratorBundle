@@ -31,13 +31,12 @@ class FormFieldType extends AbstractType
             );
         }
 
-        if ($options['add_indexed_field']) {
-            $builder->add('indexed', 'toggle_button');
-        } else {
-            $builder->add('indexed', 'hidden');
-        }
+        $indexedFieldType = $options['add_indexed_field'] ? 'toggle_button': 'hidden';
 
         $builder
+            ->add('indexed', $indexedFieldType, array(
+                'attr' => array('class' => 'form_field_indexed')
+            ))
             ->add('type', 'form_field_type_choice')
             ->add('options', 'form_field_options')
             ->add('constraints', 'form_field_constraints')

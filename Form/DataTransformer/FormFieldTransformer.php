@@ -56,6 +56,10 @@ class FormFieldTransformer implements DataTransformerInterface
 
         $reverseTransformed = array();
         foreach ($out as $k => $v) {
+            if (self::isValidJson($v)) {
+                $v = json_decode($v, true);
+            }
+
             if ($k === "indexed") {
                 self::reverseTransformIndexed($v);
             }
@@ -79,7 +83,7 @@ class FormFieldTransformer implements DataTransformerInterface
      *
      * @param string & $indexed
      */
-    protected function reverseTransformIndexed(&$indexed)
+    protected static function reverseTransformIndexed(&$indexed)
     {
         $indexed = (boolean)$indexed ? "1" : "0";
     }
@@ -89,7 +93,7 @@ class FormFieldTransformer implements DataTransformerInterface
      *
      * @param array & $options
      */
-    protected function reverseTransformOptions(array &$options)
+    protected static function reverseTransformOptions(array &$options)
     {
         foreach ($options as $k => $v) {
             if(self::isValidJson($v)) {
@@ -103,7 +107,7 @@ class FormFieldTransformer implements DataTransformerInterface
      *
      * @param array | string & $constraints
      */
-    protected function reverseTransformConstraints(&$constraints)
+    protected static function reverseTransformConstraints(&$constraints)
     {
         if(self::isValidJson($constraints)) {
             $constraints = json_decode($constraints, true);
@@ -116,7 +120,7 @@ class FormFieldTransformer implements DataTransformerInterface
      * @param string $toCheck
      * @return boolean
      */
-    protected function isValidJson($toCheck)
+    protected static function isValidJson($toCheck)
     {
          return !empty($toCheck) && is_string($toCheck) && is_array(json_decode($toCheck, true)) && json_last_error() == 0;
     }

@@ -23,7 +23,6 @@ class ToggleButtonType extends AbstractType
                 "0" => 'Off',
                 "1" => 'On'
             ),
-            'data'     => 0,
             'multiple' => false,
             'expanded' => true,
             'empty_value' => false
