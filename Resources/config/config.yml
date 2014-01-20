@@ -188,7 +188,7 @@ tms_form_generator:
                 height: {"type": "number", "options": {"required": false, "data": 40}}
                 length: {"type": "number", "options": {"required": false, "data": 5}}
                 quality: {"type": "number", "options": {"required": false, "data": 15}}
-                charset: {"type": "text", "options": {"required": false, "data": "abcdefhjkmnprstuvwxyz23456789"}}
+                charset: {"type": "text", "options": {"required": false, "data": "abcdefhijklmnopqrstuvwxyz0123456789"}}
                 keep_value: {"type": "toggle_button", "options": {"required": false, "data": "1"}}
                 as_file: {"type": "toggle_button", "options": {"required": false}}
                 as_url: {"type": "toggle_button", "options": {"required": false}}

@@ -50,32 +50,12 @@ class FormBuilderGenerator implements GeneratorInterface
     }
 
     /**
-     * getBooleanOptions
-     *
-     * @return array
-     */
-    public static function getBooleanOptions()
-    {
-        return array(
-            'required',
-            'disabled',
-            'trim',
-            'read_only',
-            'always_empty',
-            'expanded',
-            'multiple',
-            'with_seconds'
-        );
-    }
-
-    /**
      * setDefaultFieldOptions
-     *
+     *O
      * @param OptionsResolverInterface $resolver
      */
     protected function setDefaultFieldOptions(OptionsResolverInterface $resolver)
     {
-        $booleanOptions = self::getBooleanOptions();
         $formFieldTypes = $this->formFieldTypes;
         $resolver
             ->setRequired(array('name', 'type'))
@@ -94,14 +74,14 @@ class FormBuilderGenerator implements GeneratorInterface
 
                     return $value;
                 },
-                'options' => function (Options $options, $values) use ($booleanOptions) {
+                'options' => function (Options $options, $values) {
                     if (!$values) {
                         return array();
                     }
 
                     foreach ($values as $k => $v) {
-                        if (in_array($k, $booleanOptions)) {
-                            $values[$k] = (boolean)$v;
+                        if (is_string($v) && strlen($v) == 0) {
+                            unset($values[$k]);
                         }
                     }
 
