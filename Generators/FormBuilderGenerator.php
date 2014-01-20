@@ -102,8 +102,6 @@ class FormBuilderGenerator implements GeneratorInterface
                     foreach ($values as $k => $v) {
                         if (in_array($k, $booleanOptions)) {
                             $values[$k] = (boolean)$v;
-                        } elseif (empty($v)) {
-                            unset($values[$k]);
                         }
                     }
 
