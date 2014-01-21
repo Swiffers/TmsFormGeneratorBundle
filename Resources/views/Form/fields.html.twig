@@ -58,11 +58,91 @@
 {% block html_text_row %}
     {{ form_widget(form) }}
 {% endblock %}
-
 {% block html_text_widget %}
     <div class="html_text">
         {% spaceless %}
             {{ content | raw }}
         {% endspaceless %}
     </div>
+{% endblock %}
+
+{% block sfr_repayment_mode_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+{% block sfr_repayment_mode_widget %}
+    {% spaceless %}
+        {{ block('form_widget') }}
+    {% endspaceless %}
+    <script type="text/javascript">
+        $('document').ready(function() {
+            var $form = $('#{{ id }}').closest('form');
+            var $ibanField = $form.find('.{{ iban_field_class }}');
+            var $repaymentModeField = $form.find('.{{ repayment_mode_field_class }}');
+            var repaymentModeFieldDefaultValue = $repaymentModeField.find('input:checked').attr('value');
+            $repaymentModeField.hide();
+
+            var $sfr_repayment_mode = $('<input type="checkbox" id="sfr_repayment_mode_check" /><label for="sfr_repayment_mode_check">Je souhaite recevoir mon remboursement par lettre-chèque</label>');
+            $sfr_repayment_mode.on('change', function(event) {
+                var isChecked = $(this).is(':checked');
+                $ibanField.find('input').each(function() {
+                    $(this).prop('disabled', isChecked);
+                });
+
+                repaymentModeFieldValue = isChecked ? "cheque" : "virement";
+                $repaymentModeField.find('input[value="'+repaymentModeFieldValue+'"]').prop('checked', true);
+            });
+            if (repaymentModeFieldDefaultValue == "cheque") {
+                $sfr_repayment_mode.prop('checked', true);
+                $ibanField.find('input').each(function() {
+                    $(this).prop('disabled', true);
+                });
+            }
+
+            $form.on('submit', function(event) {
+                if (!$sfr_repayment_mode.is(':checked')) {
+                    return true;
+                }
+
+                event.preventDefault();
+                var form = $(this);
+                var $modal = $('\
+                    <div id="tms_confirm_action_modal" tabindex="-1" class="modal fade">\
+                        <div class="modal-dialog">\
+                            <div class="modal-content">\
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
+                                <div class="content"></div>\
+                                <div class="actions"></div>\
+                            <div>\
+                        <div>\
+                    </div>\
+                ');
+                $modal.on('hidden.bs.modal', function () {
+                    $(this).remove();
+                });
+                $modal.find('.modal-content .content').append("<h2>Vous avez choisi de recevoir votre remboursement par lettre-chèque.</h2>");
+
+                var $confirmSwitch = $('<a href="#confirmSwitch">Confirmer</a>');
+                $confirmSwitch.on('click', function(event) {
+                    event.preventDefault();
+                    form.off('submit');
+                    form.submit();
+                });
+                $modal.find('.modal-content .actions').append($confirmSwitch);
+
+                var $cancelSwitch = $('<a href="#cancelSwitch">Saisir mon IBAN</a>');
+                $cancelSwitch.on('click', function(event) {
+                    event.preventDefault();
+                    $modal.modal('hide');
+                    $sfr_repayment_mode.prop('checked', false);
+                    $sfr_repayment_mode.change();
+                });
+                $modal.find('.modal-content .actions').append($cancelSwitch);
+
+                $('body').append($modal);
+                $modal.modal('show');
+            });
+
+            $repaymentModeField.after($sfr_repayment_mode);
+        });
+    </script>
 {% endblock %}
