@@ -210,5 +210,5 @@ tms_form_generator:
             type: sfr_repayment_mode
             alias: "SFR script pour le mode de remboursement"
             options:
-                iban_field_name: {"type": "text", "options": {"required": true}}
-                repayment_mode_field_name: {"type": "text", "options": {"required": true}}
+                iban_field_class: {"type": "text", "options": {"required": true}}
+                repayment_mode_field_class: {"type": "text", "options": {"required": true}}

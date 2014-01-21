@@ -20,8 +20,8 @@ class SfrRepaymentModeType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars = array_merge($view->vars, array(
-            'iban_field_name' => $options['iban_field_name'],
-            'repayment_mode_field_name' => $options['repayment_mode_field_name'],
+            'iban_field_class' => $options['iban_field_class'],
+            'repayment_mode_field_class' => $options['repayment_mode_field_class'],
         ));
     }
 
@@ -31,8 +31,8 @@ class SfrRepaymentModeType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired(array(
-            'iban_field_name',
-            'repayment_mode_field_name'
+            'iban_field_class',
+            'repayment_mode_field_class'
         ));
     }
 
