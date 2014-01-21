@@ -67,3 +67,8 @@ services:
         class: Tms\Bundle\FormGeneratorBundle\Form\Type\ImeiType
         tags:
             - { name: form.type, alias: imei }
+
+    form.type.sfr_repayment_mode:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\SfrRepaymentModeType
+        tags:
+            - { name: form.type, alias: sfr_repayment_mode }

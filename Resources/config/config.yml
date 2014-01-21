@@ -205,3 +205,10 @@ tms_form_generator:
             parent: form
             type: hidden
             alias: "Champ invisible"
+
+        sfr_repayment_mode:
+            type: sfr_repayment_mode
+            alias: "SFR script pour le mode de remboursement"
+            options:
+                iban_field_name: {"type": "text", "options": {"required": true}}
+                repayment_mode_field_name: {"type": "text", "options": {"required": true}}
