@@ -70,9 +70,11 @@
     {{ form_widget(form) }}
 {% endblock %}
 {% block sfr_repayment_mode_widget %}
+    <ul>
     {% spaceless %}
-        {{ block('form_widget') }}
+        <li>{{ block('form_widget') }}</li>
     {% endspaceless %}
+    </ul>
     <script type="text/javascript">
         $('document').ready(function() {
             var $form = $('#{{ id }}').closest('form');
