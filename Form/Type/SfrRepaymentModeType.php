@@ -22,6 +22,8 @@ class SfrRepaymentModeType extends AbstractType
         $view->vars = array_merge($view->vars, array(
             'iban_field_class' => $options['iban_field_class'],
             'repayment_mode_field_class' => $options['repayment_mode_field_class'],
+            'checked_repayment_mode_value' => $options['checked_repayment_mode_value'],
+            'unchecked_repayment_mode_value' => $options['unchecked_repayment_mode_value']
         ));
     }
 
@@ -32,7 +34,9 @@ class SfrRepaymentModeType extends AbstractType
     {
         $resolver->setRequired(array(
             'iban_field_class',
-            'repayment_mode_field_class'
+            'repayment_mode_field_class',
+            'checked_repayment_mode_value',
+            'unchecked_repayment_mode_value'
         ));
     }
 

@@ -88,10 +88,10 @@
                     $(this).prop('disabled', isChecked);
                 });
 
-                repaymentModeFieldValue = isChecked ? "cheque" : "virement";
+                repaymentModeFieldValue = isChecked ? "{{ checked_repayment_mode_value }}" : "{{ unchecked_repayment_mode_value }}";
                 $repaymentModeField.find('input[value="'+repaymentModeFieldValue+'"]').prop('checked', true);
             });
-            if (repaymentModeFieldDefaultValue == "cheque") {
+            if (repaymentModeFieldDefaultValue == "{{ checked_repayment_mode_value }}") {
                 $sfr_repayment_mode.prop('checked', true);
                 $ibanField.find('input').each(function() {
                     $(this).prop('disabled', true);

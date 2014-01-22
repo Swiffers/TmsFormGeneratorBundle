@@ -212,3 +212,5 @@ tms_form_generator:
             options:
                 iban_field_class: {"type": "text", "options": {"required": true}}
                 repayment_mode_field_class: {"type": "text", "options": {"required": true}}
+                checked_repayment_mode_value: {"type": "text", "options": {"required": true}}
+                unchecked_repayment_mode_value: {"type": "text", "options": {"required": true}}
