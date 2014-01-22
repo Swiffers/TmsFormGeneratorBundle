@@ -70,11 +70,10 @@
     {{ form_widget(form) }}
 {% endblock %}
 {% block sfr_repayment_mode_widget %}
-    <ul>
     {% spaceless %}
-        <li>{{ block('form_widget') }}</li>
+        {{ block('form_widget') }}
     {% endspaceless %}
-    </ul>
+
     <script type="text/javascript">
         $('document').ready(function() {
             var $form = $('#{{ id }}').closest('form');
@@ -144,7 +143,9 @@
                 $modal.modal('show');
             });
 
-            $repaymentModeField.after($sfr_repayment_mode);
+            $container = $('<ul><li></li></ul>');
+            $container.find('li').append($sfr_repayment_mode);
+            $repaymentModeField.after($container)
         });
     </script>
 {% endblock %}
