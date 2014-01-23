@@ -85,18 +85,25 @@
             var $sfr_repayment_mode = $('<input type="checkbox" id="sfr_repayment_mode_check" /><label for="sfr_repayment_mode_check">Je souhaite recevoir mon remboursement par lettre-chèque</label>');
             $sfr_repayment_mode.on('change', function(event) {
                 var isChecked = $(this).is(':checked');
-                $ibanField.find('input').each(function() {
-                    $(this).prop('disabled', isChecked);
-                });
+                $ibanField.find('input').prop('disabled', isChecked);
+
+                if (isChecked) {
+                    $ibanField.find('input').removeAttr('required');
+                } else {
+                    $ibanField.find('input').attr('required', 'required');
+                }
 
                 repaymentModeFieldValue = isChecked ? "{{ checked_repayment_mode_value }}" : "{{ unchecked_repayment_mode_value }}";
                 $repaymentModeField.find('input[value="'+repaymentModeFieldValue+'"]').prop('checked', true);
             });
             if (repaymentModeFieldDefaultValue == "{{ checked_repayment_mode_value }}") {
                 $sfr_repayment_mode.prop('checked', true);
-                $ibanField.find('input').each(function() {
-                    $(this).prop('disabled', true);
-                });
+                $ibanField.find('input')
+                    .prop('disabled', true)
+                    .removeAttr('required')
+                ;
+            } else {
+                $ibanField.find('input').attr('required', 'required');
             }
 
             $form.on('submit', function(event) {
