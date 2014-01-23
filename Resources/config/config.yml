@@ -13,6 +13,7 @@ tms_form_generator:
                 required: {"type": "toggle_button", "options": {"required": false}}
                 disabled: {"type": "toggle_button", "options": {"required": false}}
                 read_only: {"type": "toggle_button", "options": {"required": false}}
+                error_bubbling: {"type": "toggle_button", "options": {"required": false}}
                 data: {"type": "text", "options": {"required": false}}
                 attr: {"type": "text", "options": {"required": false}}
                 help: {"type": "textarea", "options": {"required": false}}
