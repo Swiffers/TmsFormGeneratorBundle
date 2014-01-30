@@ -23,12 +23,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->append($this->addFormFieldTypesNode())
-                ->arrayNode('form_field_constraints')
-                    ->defaultValue(array())
-                    ->prototype('array')
-                        ->prototype('scalar')->end()
-                    ->end()
-                ->end()
+                ->append($this->addFormFieldConstraintsNode())
             ->end()
         ;
 
@@ -48,6 +43,36 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('type')->isRequired()->end()
                     ->booleanNode('abstract')->defaultFalse()->end()
                     ->scalarNode('parent')->defaultNull()->end()
+                    ->arrayNode('options')
+                        ->defaultValue(array())
+                        ->prototype('array')
+                            ->children()
+                                ->scalarNode('type')->end()
+                                ->arrayNode('options')
+                                    ->prototype('variable')->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                    ->scalarNode('alias')->defaultNull()->end()
+                ->end()
+            ->end()
+        ;
+
+        return $node;
+    }
+
+    protected function addFormFieldConstraintsNode()
+    {
+        $builder = new TreeBuilder();
+        $node = $builder->root('form_field_constraints');
+
+        $node
+            ->defaultValue(array())
+            ->useAttributeAsKey('id')
+            ->prototype('array')
+                ->children()
+                    ->scalarNode('class')->isRequired()->end()
                     ->arrayNode('options')
                         ->defaultValue(array())
                         ->prototype('array')

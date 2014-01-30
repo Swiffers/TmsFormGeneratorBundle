@@ -4,6 +4,10 @@ twig:
             - 'TmsFormGeneratorBundle:Form:fields.html.twig'
 
 tms_form_generator:
+
+    ####################
+    ## Form Fields Types
+
     form_field_types:
         form:
             abstract: true
@@ -215,3 +219,87 @@ tms_form_generator:
                 repayment_mode_field_class: {"type": "text", "options": {"required": true}}
                 checked_repayment_mode_value: {"type": "text", "options": {"required": true}}
                 unchecked_repayment_mode_value: {"type": "text", "options": {"required": true}}
+
+    ##########################
+    ## Form Fields Constraints
+
+    form_field_constraints:
+        not_blank:
+            class: \Symfony\Component\Validator\Constraints\NotBlank
+            options:
+                message: {"type": "textarea", "options": {"required": false}}
+
+        blank:
+            class: \Symfony\Component\Validator\Constraints\Blank
+            options:
+                message: {"type": "textarea", "options": {"required": false}}
+
+        not_null:
+            class: \Symfony\Component\Validator\Constraints\NotNull
+            options:
+                message: {"type": "textarea", "options": {"required": false}}
+
+        null:
+            class: \Symfony\Component\Validator\Constraints\Null
+            options:
+                message: {"type": "textarea", "options": {"required": false}}
+
+        true:
+            class: \Symfony\Component\Validator\Constraints\True
+            options:
+                message: {"type": "textarea", "options": {"required": false}}
+
+        false:
+            class: \Symfony\Component\Validator\Constraints\False
+            options:
+                message: {"type": "textarea", "options": {"required": false}}
+
+        type:
+            class: \Symfony\Component\Validator\Constraints\Type
+            options:
+                type: {"type": "choice", "options": {"required": true, "choices": {"array": "array","bool": "bool","callable": "callable","float": "float","double": "double","int": "int","integer": "integer","long": "long","null": "null","numeric": "numeric","object": "object","real": "real","resource": "resource","scalar": "scalar","string": "string"}}}
+                message: {"type": "textarea", "options": {"required": false}}
+
+        email:
+            class: \Symfony\Component\Validator\Constraints\Email
+            options:
+                checkMX: {"type": "toggle_button", "options": {"required": false}}
+                checkHost: {"type": "toggle_button", "options": {"required": false}}
+                message: {"type": "textarea", "options": {"required": false}}
+
+        length:
+            class: \Symfony\Component\Validator\Constraints\Length
+            options:
+                min: {"type": "number", "options": {"required": false}}
+                max: {"type": "number", "options": {"required": false}}
+                minMessage: {"type": "textarea", "options": {"required": false}}
+                maxMessage: {"type": "textarea", "options": {"required": false}}
+                exactMessage: {"type": "textarea", "options": {"required": false}}
+
+        url:
+            class: \Symfony\Component\Validator\Constraints\Url
+            options:
+                protocols: {"type": "choice", "options": {"required": true, "choices": {"http":"http", "https":"https"}}}
+                message: {"type": "textarea", "options": {"required": false}}
+
+        regex:
+            class: \Symfony\Component\Validator\Constraints\Regex
+            options:
+                pattern: {"type": "text", "options": {"required": false}}
+                match: {"type": "toggle_button", "options": {"required": false}}
+                message: {"type": "textarea", "options": {"required": false}}
+
+        ip:
+            class: \Symfony\Component\Validator\Constraints\Ip
+            options:
+                version: {"type": "choice", "options": {"required": true, "choices": {"4":"Valide une adresse IPv4", "6":"Valide une adresse IPv6", "all":"Valide tous les formats d'IP", "4_no_priv": "Valide une adresse IPv4 mais sans plage d'adresses privées", "6_no_priv": "Valide une adresse IPv6 mais sans plage d'adresses privées", "all_no_priv": "Valide tous les formats d'IP mais sans plage d'adresses privées", "4_no_res": "Valide une adresse IPv4 mais sans plage d'adresses réservées", "6_no_res": "Valide une adresse IPv6 mais sans plage d'adresses réservées", "all_no_res": "Valide tous les formats d'IP mais sans plage d'adresses réservées", "4_public": "Valide une adresse IPv4 mais sans plage d'adresses privées ou réservées", "6_public": "Valide une adresse IPv6 mais sans plage d'adresses privées ou réservées", "all_public": "Valide tous les formats d'IP mais sans plage d'adresses privées ou réservées"}}}
+                message: {"type": "textarea", "options": {"required": false}}
+
+        range:
+            class: \Symfony\Component\Validator\Constraints\Range
+            options:
+                min: {"type": "number", "options": {"required": false}}
+                max: {"type": "number", "options": {"required": false}}
+                minMessage: {"type": "textarea", "options": {"required": false}}
+                maxMessage: {"type": "textarea", "options": {"required": false}}
+                invalidMessage: {"type": "textarea", "options": {"required": false}}
