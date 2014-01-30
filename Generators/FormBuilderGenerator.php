@@ -63,7 +63,6 @@ class FormBuilderGenerator implements GeneratorInterface
             ->setDefaults(array(
                 'options'     => array(),
                 'constraints' => array(),
-                'eligibility' => array(),
                 'indexed'     => false
             ))
             ->setNormalizers(array(
@@ -78,7 +77,7 @@ class FormBuilderGenerator implements GeneratorInterface
                     if (!$values) {
                         return array();
                     }
-
+                    // Cleanup values
                     foreach ($values as $k => $v) {
                         if (is_string($v) && strlen($v) == 0) {
                             unset($values[$k]);
@@ -91,16 +90,15 @@ class FormBuilderGenerator implements GeneratorInterface
                     if (!$values) {
                         return array();
                     }
-
-                    return $values;
-                },
-                'eligibility' => function (Options $options, $values) {
-                    if (!$values) {
-                        return array();
+                    // Cleanup values
+                    foreach ($values as $k => $v) {
+                        if (is_string($v) && strlen($v) == 0) {
+                            unset($values[$k]);
+                        }
                     }
 
                     return $values;
-                },
+                }
             ))
         ;
     }
@@ -148,8 +146,15 @@ class FormBuilderGenerator implements GeneratorInterface
         $this->setDefaultFieldOptions($resolver);
         $parameters = $resolver->resolve($options);
 
-        // TODO: Uncoment this part and work on constraints !
-        //$parameters['options']['constraints'] = $parameters['constraints'];
+        $parameters['options']['constraints'] = $this->generateFieldConstraints($parameters['constraints']);
         $formBuilder->add($parameters['name'], $parameters['type'], $parameters['options']);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function generateFieldConstraints(array $constraints = array())
+    {
+        return array();
     }
 }
