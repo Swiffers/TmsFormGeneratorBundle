@@ -6,10 +6,15 @@ services:
         class:     %tms_form_generator.form_builder_generator.class%
         arguments: [@form.factory, %tms_form_generator.form_field_types%]
 
-    tms_form_generator.form_field:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Field\FormField
+    tms_form_generator.form_field.type:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Field\FormFieldType
         abstract: true
         arguments: [null, null, null]
+
+    tms_form_generator.form_field.constraint:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Field\FormFieldConstraint
+        abstract: true
+        arguments: [null, null]
 
     tms_form_generator.form.extension.help:
         class: Tms\Bundle\FormGeneratorBundle\Form\Type\Extension\HelpMessageTypeExtension
@@ -42,11 +47,16 @@ services:
         tags:
             - { name: form.type, alias: form_field_options }
 
+    tms_form_generator.form.type.form_field_constraint_choice:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintChoiceType
+        arguments: [%tms_form_generator.form_field_constraints%]
+        tags:
+            - { name: form.type, alias: form_field_constraint_choice }
+
     tms_form_generator.form.type.form_field_constraints:
         class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintsType
         tags:
             - { name: form.type, alias: form_field_constraints }
-
 
     form.type.html_text:
         class: Tms\Bundle\FormGeneratorBundle\Form\Type\HtmlTextType

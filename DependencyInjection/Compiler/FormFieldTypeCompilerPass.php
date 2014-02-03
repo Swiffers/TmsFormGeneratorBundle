@@ -19,8 +19,8 @@ class FormFieldTypeCompilerPass implements CompilerPassInterface
         $serviceDefinitionNames = array();
 
         foreach ($formFieldTypes as $id => $parameters) {
-            $serviceDefinition = new DefinitionDecorator('tms_form_generator.form_field');
-            $serviceDefinitionNames[$id] = sprintf('tms_form_generator.form_field.%s', $id);
+            $serviceDefinition = new DefinitionDecorator('tms_form_generator.form_field.type');
+            $serviceDefinitionNames[$id] = sprintf('tms_form_generator.form_field.type.%s', $id);
             $parent = null;
             if ($parameters['parent']) {
                 $parent = new Reference($serviceDefinitionNames[$parameters['parent']]);

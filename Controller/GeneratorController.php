@@ -31,7 +31,7 @@ class GeneratorController extends Controller
         $data = mb_convert_encoding($data, "UTF-8", "ISO-8859-1");
         $data = json_decode($data, true);
 
-        $formFieldServiceName = sprintf('tms_form_generator.form_field.%s', $type);
+        $formFieldServiceName = sprintf('tms_form_generator.form_field.type.%s', $type);
         $formField = $this->get($formFieldServiceName);
 
         $options = array(

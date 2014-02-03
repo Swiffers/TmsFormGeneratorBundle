@@ -232,42 +232,50 @@ tms_form_generator:
     form_field_constraints:
         not_blank:
             class: \Symfony\Component\Validator\Constraints\NotBlank
+            alias: "not blank"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
 
         blank:
             class: \Symfony\Component\Validator\Constraints\Blank
+            alias: "blank"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
 
         not_null:
             class: \Symfony\Component\Validator\Constraints\NotNull
+            alias: "not null"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
 
-        null:
+        _null:
             class: \Symfony\Component\Validator\Constraints\Null
+            alias: "null"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
 
-        true:
+        _true:
             class: \Symfony\Component\Validator\Constraints\True
+            alias: "true"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
 
-        false:
+        _false:
             class: \Symfony\Component\Validator\Constraints\False
+            alias: "false"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
 
         type:
             class: \Symfony\Component\Validator\Constraints\Type
+            alias: "type"
             options:
                 type: {"type": "choice", "options": {"required": true, "choices": {"array": "array", "bool": "bool", "callable": "callable", "float": "float", "double": "double", "int": "int", "integer": "integer", "long": "long", "null": "null", "numeric": "numeric", "object": "object", "real": "real", "resource": "resource", "scalar": "scalar", "string": "string"}}}
                 message: {"type": "textarea", "options": {"required": false}}
 
         email:
             class: \Symfony\Component\Validator\Constraints\Email
+            alias: "email"
             options:
                 checkMX: {"type": "toggle_button", "options": {"required": false}}
                 checkHost: {"type": "toggle_button", "options": {"required": false}}
@@ -275,6 +283,7 @@ tms_form_generator:
 
         length:
             class: \Symfony\Component\Validator\Constraints\Length
+            alias: "length"
             options:
                 min: {"type": "number", "options": {"required": false}}
                 max: {"type": "number", "options": {"required": false}}
@@ -284,12 +293,14 @@ tms_form_generator:
 
         url:
             class: \Symfony\Component\Validator\Constraints\Url
+            alias: "url"
             options:
                 protocols: {"type": "choice", "options": {"required": true, "choices": {"http": "http", "https": "https"}}}
                 message: {"type": "textarea", "options": {"required": false}}
 
         regex:
             class: \Symfony\Component\Validator\Constraints\Regex
+            alias: "regex"
             options:
                 pattern: {"type": "text", "options": {"required": false}}
                 match: {"type": "toggle_button", "options": {"required": false}}
@@ -297,12 +308,14 @@ tms_form_generator:
 
         ip:
             class: \Symfony\Component\Validator\Constraints\Ip
+            alias: "ip"
             options:
                 version: {"type": "choice", "options": {"required": true, "choices": {"4": "Valide une adresse IPv4", "6": "Valide une adresse IPv6", "all": "Valide tous les formats d'IP", "4_no_priv": "Valide une adresse IPv4 mais sans plage d'adresses privées", "6_no_priv": "Valide une adresse IPv6 mais sans plage d'adresses privées", "all_no_priv": "Valide tous les formats d'IP mais sans plage d'adresses privées", "4_no_res": "Valide une adresse IPv4 mais sans plage d'adresses réservées", "6_no_res": "Valide une adresse IPv6 mais sans plage d'adresses réservées", "all_no_res": "Valide tous les formats d'IP mais sans plage d'adresses réservées", "4_public": "Valide une adresse IPv4 mais sans plage d'adresses privées ou réservées", "6_public": "Valide une adresse IPv6 mais sans plage d'adresses privées ou réservées", "all_public": "Valide tous les formats d'IP mais sans plage d'adresses privées ou réservées"}}}
                 message: {"type": "textarea", "options": {"required": false}}
 
         range:
             class: \Symfony\Component\Validator\Constraints\Range
+            alias: "range"
             options:
                 min: {"type": "number", "options": {"required": false}}
                 max: {"type": "number", "options": {"required": false}}
@@ -312,69 +325,81 @@ tms_form_generator:
 
         equal_to:
             class: \Symfony\Component\Validator\Constraints\EqualTo
+            alias: "equal to"
             options:
                 value: {"type": "text", "options": {"required": true}}
                 message: {"type": "textarea", "options": {"required": false}}
 
         not_equal_to:
             class: \Symfony\Component\Validator\Constraints\NotEqualTo
+            alias: "not equal to"
             options:
                 value: {"type": "text", "options": {"required": true}}
                 message: {"type": "textarea", "options": {"required": false}}
 
         identical_to:
             class: \Symfony\Component\Validator\Constraints\IdenticalTo
+            alias: "identical to"
             options:
                 value: {"type": "text", "options": {"required": true}}
                 message: {"type": "textarea", "options": {"required": false}}
 
         not_identical_to:
             class: \Symfony\Component\Validator\Constraints\NotIdenticalTo
+            alias: "not identical to"
             options:
                 value: {"type": "text", "options": {"required": true}}
                 message: {"type": "textarea", "options": {"required": false}}
 
         less_than:
             class: \Symfony\Component\Validator\Constraints\LessThan
+            alias: "less than"
             options:
                 value: {"type": "text", "options": {"required": true}}
                 message: {"type": "textarea", "options": {"required": false}}
 
         less_than_or_equal:
             class: \Symfony\Component\Validator\Constraints\LessThanOrEqual
+            alias: "less than or equal"
             options:
                 value: {"type": "text", "options": {"required": true}}
                 message: {"type": "textarea", "options": {"required": false}}
 
         greater_than:
             class: \Symfony\Component\Validator\Constraints\GreaterThan
+            alias: "greater than"
             options:
                 value: {"type": "text", "options": {"required": true}}
                 message: {"type": "textarea", "options": {"required": false}}
 
         greater_than_or_equal:
             class: \Symfony\Component\Validator\Constraints\GreaterThanOrEqual
+            alias: "greater than or equal"
             options:
                 value: {"type": "text", "options": {"required": true}}
                 message: {"type": "textarea", "options": {"required": false}}
 
         date:
             class: \Symfony\Component\Validator\Constraints\Date
+            alias: "date"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
 
         date_time:
             class: \Symfony\Component\Validator\Constraints\DateTime
+            alias: "date time"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
 
         time:
             class: \Symfony\Component\Validator\Constraints\Time
+            alias: "time"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
 
         choice:
             class: \Symfony\Component\Validator\Constraints\Choice
+            alias: "choice"
             options:
                 choices: {"type": "text", "options": {"required": false}}
                 callback: {"type": "text", "options": {"required": false}}
@@ -389,6 +414,7 @@ tms_form_generator:
 
         collection:
             class: \Symfony\Component\Validator\Constraints\Collection
+            alias: "collection"
             options:
                 fields: {"type": "text", "options": {"required": true}}
                 allowExtraFields: {"type": "toggle_button", "options": {"required": false}}
@@ -398,6 +424,7 @@ tms_form_generator:
 
         count:
             class: \Symfony\Component\Validator\Constraints\Count
+            alias: "count"
             options:
                 min: {"type": "number", "options": {"required": false}}
                 max: {"type": "number", "options": {"required": false}}
@@ -407,21 +434,25 @@ tms_form_generator:
 
         language:
             class: \Symfony\Component\Validator\Constraints\Language
+            alias: "language"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
 
         locale:
             class: \Symfony\Component\Validator\Constraints\Locale
+            alias: "locale"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
 
         country:
             class: \Symfony\Component\Validator\Constraints\Country
+            alias: "country"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
 
         file:
             class: \Symfony\Component\Validator\Constraints\File
+            alias: "file"
             options:
                 maxSize: {"type": "text", "options": {"required": false}}
                 mimeTypes: {"type": "text", "options": {"required": false}}
@@ -435,6 +466,7 @@ tms_form_generator:
 
         image:
             class: \Symfony\Component\Validator\Constraints\Image
+            alias: "image"
             options:
                 mimeTypes: {"type": "text", "options": {"required": false}}
                 minWidth: {"type": "number", "options": {"required": false}}
@@ -450,22 +482,26 @@ tms_form_generator:
 
         card_scheme:
             class: \Symfony\Component\Validator\Constraints\CardScheme
+            alias: "card scheme"
             options:
                 schemes: {"type": "choice", "options": {"required": true, "choices": {"AMEX": "AMEX", "CHINA_UNIONPAY": "CHINA_UNIONPAY", "DINERS": "DINERS", "DISCOVER": "DISCOVER", "INSTAPAYMENT": "INSTAPAYMENT", "JCB": "JCB", "LASER": "LASER", "MAESTRO": "MAESTRO", "MASTERCARD": "MASTERCARD", "VISA": "VISA"}}}
                 message: {"type": "textarea", "options": {"required": false}}
 
         luhn:
             class: \Symfony\Component\Validator\Constraints\Luhn
+            alias: "luhn"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
 
         iban:
             class: \Symfony\Component\Validator\Constraints\Iban
+            alias: "iban"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
 
         isbn:
             class: \Symfony\Component\Validator\Constraints\Isbn
+            alias: "isbn"
             options:
                 isbn10: {"type": "toggle_button", "options": {"required": false}}
                 isbn13: {"type": "toggle_button", "options": {"required": false}}
@@ -475,6 +511,7 @@ tms_form_generator:
 
         issn:
             class: \Symfony\Component\Validator\Constraints\Issn
+            alias: "issn"
             options:
                 message: {"type": "textarea", "options": {"required": false}}
                 caseSensitive: {"type": "toggle_button", "options": {"required": false}}

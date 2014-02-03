@@ -8,7 +8,7 @@
 namespace Tms\Bundle\FormGeneratorBundle\Form\Field;
 
 
-class FormField
+class FormFieldType
 {
     protected $type;
     protected $parent;
@@ -21,7 +21,7 @@ class FormField
      * @param FormField $parent
      * @param array $options
      */
-    public function __construct($type, FormField $parent = null, $options = array())
+    public function __construct($type, FormFieldType $parent = null, $options = array())
     {
         $this->type = $type;
         $this->parent = $parent;
