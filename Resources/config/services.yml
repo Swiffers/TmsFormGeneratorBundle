@@ -53,6 +53,16 @@ services:
         tags:
             - { name: form.type, alias: form_field_constraint_choice }
 
+    tms_form_generator.form.type.form_field_constraint:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintType
+        tags:
+            - { name: form.type, alias: form_field_constraint }
+
+    tms_form_generator.form.type.form_field_constraint_options:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintOptionsType
+        tags:
+            - { name: form.type, alias: form_field_constraint_options }
+
     tms_form_generator.form.type.form_field_constraints:
         class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintsType
         tags:
