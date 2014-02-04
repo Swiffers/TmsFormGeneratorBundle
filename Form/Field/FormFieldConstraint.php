@@ -10,7 +10,7 @@ namespace Tms\Bundle\FormGeneratorBundle\Form\Field;
 
 class FormFieldConstraint
 {
-    protected $className
+    protected $className;
     protected $options;
 
     /**
