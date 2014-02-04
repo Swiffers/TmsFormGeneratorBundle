@@ -8,10 +8,9 @@
 namespace Tms\Bundle\FormGeneratorBundle\Form\Field;
 
 
-class FormFieldConstraint
+class FormFieldConstraint extends AbstractFormField
 {
     protected $className;
-    protected $options;
 
     /**
      * Constructor
@@ -21,8 +20,8 @@ class FormFieldConstraint
      */
     public function __construct($className, $options = array())
     {
+        parent::__construct($options);
         $this->className = $className;
-        $this->options = $options;
     }
 
     /**
@@ -33,16 +32,6 @@ class FormFieldConstraint
     public function getClassName()
     {
         return $this->className;
-    }
-
-    /**
-     * Get Options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
     }
 
     /**
