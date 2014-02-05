@@ -12,25 +12,44 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class FormFieldsListener implements EventSubscriberInterface
+class FormFieldOptionsCleanerListener implements EventSubscriberInterface
 {
     /**
      * @var string
      */
-    protected $type;
-
-    /**
-     * @var array
-     */
-    protected $options;
+    protected $name;
 
     /**
      * {@inheritdoc}
      */
-    public function __construct($type, array $options = array())
+    public function __construct($name = null)
     {
-        $this->type = $type;
-        $this->options = $options;
+        $this->name = $name;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Get format
+     *
+     * @return string
+     */
+    public function getFormat()
+    {
+        $format = '[%s]';
+        if ($this->getName()) {
+            $format = '{"'.$this->getName().'": [%s]}';
+        }
+
+        return $format;
     }
 
     /**
@@ -55,13 +74,16 @@ class FormFieldsListener implements EventSubscriberInterface
         if (empty($data)) {
             $event->setData(array());
         } else {
-            $data = json_decode($data, true);
-            // Keep the options field in string which is tranform to an array with js
-            foreach($data['fields'] as &$dataField) {
-                $dataField['options'] = json_encode($dataField['options']);
-                //$dataField['constraints'] = json_encode($dataField['constraints']);
+            if (!is_array($data)) {
+                $data = json_decode($data, true);
             }
-            $event->setData($data['fields']);
+            // Keep the options field in string which is tranform to an array with js
+            $data = null === $this->getName() ? $data : $data[$this->getName()];
+            foreach($data as &$dataField) {
+                $dataField['options'] = json_encode($dataField['options']);
+            }
+
+            $event->setData($data);
         }
     }
 
@@ -74,6 +96,10 @@ class FormFieldsListener implements EventSubscriberInterface
         $glue = '';
         $count = 0;
         foreach ($event->getData() as $data) {
+            if (is_array($data)) {
+                $data = json_encode($data);
+            }
+
             if ($count > 0) {
                 $glue = ',';
             }
@@ -81,7 +107,7 @@ class FormFieldsListener implements EventSubscriberInterface
             $count++;
         }
 
-        $event->setData(sprintf('{"fields": [%s]} ',
+        $event->setData(sprintf($this->getFormat(),
             $jsonFields
         ));
     }

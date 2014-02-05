@@ -10,7 +10,7 @@ namespace Tms\Bundle\FormGeneratorBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Tms\Bundle\FormGeneratorBundle\Form\EventListener\FormFieldsListener;
+use Tms\Bundle\FormGeneratorBundle\Form\EventListener\FormFieldOptionsCleanerListener;
 
 class FormFieldsType extends AbstractType
 {
@@ -19,11 +19,7 @@ class FormFieldsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $listener = new FormFieldsListener(
-            $options['type'],
-            $options['options']
-        );
-        $builder->addEventSubscriber($listener);
+        $builder->addEventSubscriber(new FormFieldOptionsCleanerListener('fields'));
     }
 
     /**

@@ -36,7 +36,7 @@ FormField.prototype.displayTab = function() {
 
     this.$field.find('.totab').each(function() {
         var $fieldset = $(this).closest('fieldset');
-        var name = $fieldset.find('label').text();
+        var name = $fieldset.find('> span > label').text();
         var $tabItem = $('<li><a href="#'+$(this).attr('id')+'_container" data-toggle="tab">'+name+'</a></li>');
         $tab.append($tabItem);
         var $contentItem = $('<div class="tab-pane" id="'+$(this).attr('id')+'_container"></div>');

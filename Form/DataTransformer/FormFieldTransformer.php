@@ -96,7 +96,7 @@ class FormFieldTransformer implements DataTransformerInterface
     protected static function reverseTransformOptions(array &$options)
     {
         foreach ($options as $k => $v) {
-            if(self::isValidJson($v)) {
+            if (self::isValidJson($v)) {
                 $options[$k] = json_decode($v, true);
             }
         }
@@ -107,10 +107,12 @@ class FormFieldTransformer implements DataTransformerInterface
      *
      * @param array | string & $constraints
      */
-    protected static function reverseTransformConstraints(&$constraints)
+    protected static function reverseTransformConstraints(array &$constraints)
     {
-        if(self::isValidJson($constraints)) {
-            $constraints = json_decode($constraints, true);
+        foreach ($constraints as $k => $v) {
+            if (self::isValidJson($v)) {
+                $constraints[$k] = json_decode($v, true);
+            }
         }
     }
 

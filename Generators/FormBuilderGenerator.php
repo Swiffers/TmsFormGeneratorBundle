@@ -155,6 +155,9 @@ class FormBuilderGenerator implements GeneratorInterface
      */
     protected function generateFieldConstraints(array $constraints = array())
     {
+        if ($constraints) {
+            die('die');
+        }
         return array();
         //return array(new \Symfony\Component\Validator\Constraints\Length(array('min' => 3)));
     }
