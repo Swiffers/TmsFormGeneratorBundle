@@ -74,6 +74,8 @@ FormField.prototype.loadData = function(type) {
         var fields = $(form).html();
         var regExp = new RegExp('name="'+id, 'g')
         fields = fields.replace(regExp, 'name="'+name);
+        var regExp = new RegExp('name=&quot;'+id, 'g')
+        fields = fields.replace(regExp, 'name=&quot;'+name);
         $container.append(fields);
         $ajaxLoader.remove();
     });

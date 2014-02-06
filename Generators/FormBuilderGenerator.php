@@ -88,19 +88,6 @@ class FormBuilderGenerator implements GeneratorInterface
                     }
 
                     return $values;
-                },
-                'constraints' => function (Options $options, $values) {
-                    if (!$values || !is_array($values)) {
-                        return array();
-                    }
-                    // Cleanup values
-                    foreach ($values as $k => $v) {
-                        if (is_string($v) && strlen($v) == 0) {
-                            unset($values[$k]);
-                        }
-                    }
-
-                    return $values;
                 }
             ))
         ;
@@ -149,7 +136,10 @@ class FormBuilderGenerator implements GeneratorInterface
         $this->setDefaultFieldOptions($resolver);
         $parameters = $resolver->resolve($options);
 
-        $parameters['options']['constraints'] = $this->generateFieldConstraints($parameters['constraints']);
+        $parameters['options']['constraints'] = isset($parameters['options']['constraints']) ?
+            $this->generateFieldConstraints($parameters['options']['constraints']) :
+            null
+        ;
         $formBuilder->add($parameters['name'], $parameters['type'], $parameters['options']);
     }
 

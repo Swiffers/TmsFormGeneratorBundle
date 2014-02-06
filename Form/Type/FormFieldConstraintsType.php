@@ -38,7 +38,7 @@ class FormFieldConstraintsType extends AbstractType
             'by_reference' => false,
             'cascade_validation' => true,
             'attr' => array(
-                'class' => 'tms_form_generator_form_field_constraints totab'
+                'class' => 'tms_form_generator_form_field_constraints'
             )
         ));
     }

@@ -39,7 +39,6 @@ class FormFieldType extends AbstractType
             ))
             ->add('type', 'form_field_type_choice')
             ->add('options', 'form_field_options')
-            ->add('constraints', 'form_field_constraints')
         ;
     }
 
