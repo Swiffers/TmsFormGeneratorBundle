@@ -58,6 +58,14 @@ class FormFieldType extends AbstractFormField
             return $this->options;
         }
 
-        return array_merge_recursive($this->getParent()->getOptions(), $this->options);
+        $parentOptions = $this->getParent()->getOptions();
+        $constraintOptions = $parentOptions['constraints'];
+        unset($parentOptions['constraints']);
+
+        return array_merge_recursive(
+            $parentOptions,
+            $this->options,
+            array('constraints' => $constraintOptions)
+        );
     }
 }

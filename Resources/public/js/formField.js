@@ -37,13 +37,18 @@ FormField.prototype.displayTab = function() {
     this.$field.find('.totab').each(function() {
         var $fieldset = $(this).closest('fieldset');
         var name = $fieldset.find('> span > label').text();
-        var $tabItem = $('<li><a href="#'+$(this).attr('id')+'_container" data-toggle="tab">'+name+'</a></li>');
+        var $tabItem = $('<li><a href="#'+$(this).attr('id')+'_container">'+name+'</a></li>');
         $tab.append($tabItem);
         var $contentItem = $('<div class="tab-pane" id="'+$(this).attr('id')+'_container"></div>');
         $fieldset.find('> span').remove();
         $fieldset.detach();
         $contentItem.append($fieldset);
         $tabContent.append($contentItem);
+        $tabItem.on('click', function(event) {
+            event.preventDefault();
+            $tabItem.toggleClass('active');
+            $contentItem.toggleClass('active');
+        });
     });
 }
 

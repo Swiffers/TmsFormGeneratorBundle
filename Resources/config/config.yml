@@ -27,6 +27,7 @@ tms_form_generator:
                 constraints: {"type": "form_field_constraints"}
 
         form_field_constraints:
+            abstract: true
             type: form_field_constraints
 
         text:

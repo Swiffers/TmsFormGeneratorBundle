@@ -68,10 +68,6 @@ class FormFieldTransformer implements DataTransformerInterface
                 self::reverseTransformOptions($v);
             }
 
-            if ($k === "constraints") {
-                self::reverseTransformConstraints($v);
-            }
-
             $reverseTransformed[$k] = $v;
         }
 
@@ -98,20 +94,6 @@ class FormFieldTransformer implements DataTransformerInterface
         foreach ($options as $k => $v) {
             if (self::isValidJson($v)) {
                 $options[$k] = json_decode($v, true);
-            }
-        }
-    }
-
-    /**
-     * Reverse transform constraints
-     *
-     * @param array | string & $constraints
-     */
-    protected static function reverseTransformConstraints(array &$constraints)
-    {
-        foreach ($constraints as $k => $v) {
-            if (self::isValidJson($v)) {
-                $constraints[$k] = json_decode($v, true);
             }
         }
     }
