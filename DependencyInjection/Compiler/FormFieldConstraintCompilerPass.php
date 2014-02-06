@@ -15,8 +15,8 @@ class FormFieldConstraintCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $formFieldConstraints = $container->getParameter('tms_form_generator.form_field_constraints');
-
         $serviceDefinitionNames = array();
+        $containerDefinition = $container->getDefinition('tms_form_generator.form_field.container.constraint');
 
         foreach ($formFieldConstraints as $id => $parameters) {
             $serviceDefinition = new DefinitionDecorator('tms_form_generator.form_field.constraint');
@@ -27,6 +27,10 @@ class FormFieldConstraintCompilerPass implements CompilerPassInterface
             $serviceDefinition->replaceArgument(1, $parameters['options']);
 
             $container->setDefinition($serviceDefinitionNames[$id], $serviceDefinition);
+            $containerDefinition->addMethodCall(
+                'addConstraint',
+                array(new Reference($serviceDefinitionNames[$id]), $id)
+            );
         }
     }
 }

@@ -16,23 +16,26 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Tms\Bundle\FormGeneratorBundle\Exceptions\ConstraintNotFoundException;
+use Tms\Bundle\FormGeneratorBundle\Form\Field\FormFieldConstraintContainer;
 
 class FormBuilderGenerator implements GeneratorInterface
 {
     protected $formFactory;
+    protected $formFieldConstraintContainer;
     protected $formFieldTypes;
 
     /**
      * FormGenerator constructor
      *
      * @param FormFactoryInterface $formFactory Instance of FormFactory
+     * @param FormFieldConstraintContainer $formFieldContraintContainer
      * @param array $formFieldTypes
      */
-    public function __construct(FormFactoryInterface $formFactory, array $formFieldTypes)
+    public function __construct(FormFactoryInterface $formFactory, FormFieldConstraintContainer $formFieldConstraintContainer, array $formFieldTypes)
     {
-        $this->formFactory    = $formFactory;
-        $this->formFieldTypes = $formFieldTypes;
+        $this->formFactory                  = $formFactory;
+        $this->formFieldConstraintContainer = $formFieldConstraintContainer;
+        $this->formFieldTypes               = $formFieldTypes;
     }
 
     /**
@@ -155,10 +158,12 @@ class FormBuilderGenerator implements GeneratorInterface
      */
     protected function generateFieldConstraints(array $constraints = array())
     {
-        if ($constraints) {
-            die('die');
+        $formConstraints = array();
+        foreach ($constraints as $constraint) {
+            $formFieldConstraint = $this->formFieldConstraintContainer->getConstraint($constraint['name']);
+            $formConstraints[] = $formFieldConstraint->createFormConstraint($constraint['options']);
         }
-        return array();
-        //return array(new \Symfony\Component\Validator\Constraints\Length(array('min' => 3)));
+
+        return $formConstraints;
     }
 }

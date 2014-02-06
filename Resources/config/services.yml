@@ -4,7 +4,10 @@ parameters:
 services:
     tms_form_generator.form_builder_generator:
         class:     %tms_form_generator.form_builder_generator.class%
-        arguments: [@form.factory, %tms_form_generator.form_field_types%]
+        arguments: [@form.factory, @tms_form_generator.form_field.container.constraint, %tms_form_generator.form_field_types%]
+
+    tms_form_generator.form_field.container.constraint:
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Field\FormFieldConstraintContainer
 
     tms_form_generator.form_field.type:
         class: Tms\Bundle\FormGeneratorBundle\Form\Field\FormFieldType

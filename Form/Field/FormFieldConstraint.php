@@ -35,11 +35,11 @@ class FormFieldConstraint extends AbstractFormField
     }
 
     /**
-     * Get Constraint
+     * Create form constraint
      *
      * @return Symfony\Component\Validator\Constraint
      */
-    public function getConstraint($options = array())
+    public function createFormConstraint($options = array())
     {
         $className = $this->className;
 
