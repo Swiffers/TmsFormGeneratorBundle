@@ -5,7 +5,7 @@ function FormFieldConstraint($field, ajaxUrl, ajaxLoaderPath) {
     this.$field = $field;
     this.ajaxUrl = ajaxUrl;
     this.ajaxLoaderPath = ajaxLoaderPath;
-    this.$constraint = this.$field.find('.form_field_constraints');
+    this.$constraint = this.$field.find('.form_field_constraint_choice');
     this.$options = this.$field.find('.tms_form_generator_form_field_constraint_options');
     this.id = this.$options.attr('id');
     this.init();

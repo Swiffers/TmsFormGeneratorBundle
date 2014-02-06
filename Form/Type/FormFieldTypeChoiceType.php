@@ -40,7 +40,7 @@ class FormFieldTypeChoiceType extends AbstractType
     {
         $resolver->setDefaults(array(
             'choices' => $this->formFieldTypes,
-            'attr'    => array('class' => 'form_field_types')
+            'attr'    => array('class' => 'form_field_type_choice')
         ));
     }
 

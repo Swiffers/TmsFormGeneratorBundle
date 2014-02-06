@@ -38,7 +38,7 @@ class FormFieldConstraintChoiceType extends AbstractType
     {
         $resolver->setDefaults(array(
             'choices' => $this->formFieldConstraints,
-            'attr'    => array('class' => 'form_field_constraints')
+            'attr'    => array('class' => 'form_field_constraint_choice')
         ));
     }
 

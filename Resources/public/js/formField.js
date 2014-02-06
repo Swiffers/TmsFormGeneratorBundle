@@ -5,7 +5,7 @@ function FormField($field, ajaxUrl, ajaxLoaderPath) {
     this.$field = $field;
     this.ajaxUrl = ajaxUrl;
     this.ajaxLoaderPath = ajaxLoaderPath;
-    this.$type = this.$field.find('.form_field_types');
+    this.$type = this.$field.find('.form_field_type_choice');
     this.$options = this.$field.find('.tms_form_generator_form_field_options');
     this.id = this.$options.attr('id');
     this.init();
@@ -40,7 +40,7 @@ FormField.prototype.displayTab = function() {
         var $tabItem = $('<li><a href="#'+$(this).attr('id')+'_container" data-toggle="tab">'+name+'</a></li>');
         $tab.append($tabItem);
         var $contentItem = $('<div class="tab-pane" id="'+$(this).attr('id')+'_container"></div>');
-        $fieldset.find('span').remove();
+        $fieldset.find('> span').remove();
         $fieldset.detach();
         $contentItem.append($fieldset);
         $tabContent.append($contentItem);
