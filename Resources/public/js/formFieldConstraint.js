@@ -70,13 +70,13 @@ function FormFieldConstraintManager($container) {
 
     this.$container.append(this.createAddConstraintLink());
     var that = this;
-    this.$container.find('.tms_form_generator_form_field_constraint').each(function() {
+    this.$container.find('> fieldset').each(function() {
         $(this).append(that.createDeleteConstraintLink());
     });
 }
 
 FormFieldConstraintManager.prototype.createAddConstraintLink = function() {
-    var $addLink = $('<a href="#" class="btn btn-default add_constraint_link">Add constraint</a>');
+    var $addLink = $('<a href="#" class="btn btn-primary add_constraint_link">Add constraint</a>');
 
     var that = this;
     $addLink.on('click', function(e) {
@@ -88,7 +88,7 @@ FormFieldConstraintManager.prototype.createAddConstraintLink = function() {
 }
 
 FormFieldConstraintManager.prototype.createDeleteConstraintLink = function() {
-    var $deleteLink = $('<a href="#" class="btn btn-default delete_constraint_link">Delete constraint</a>');
+    var $deleteLink = $('<a href="#" class="btn btn-danger delete_constraint_link">Delete constraint</a>');
 
     $deleteLink.on('click', function(e) {
         e.preventDefault();

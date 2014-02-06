@@ -91,13 +91,13 @@ function FormFieldManager($container) {
 
     this.$container.append(this.createAddFieldLink());
     var that = this;
-    this.$container.find('.tms_form_generator_form_field').each(function() {
+    this.$container.find('> fieldset').each(function() {
         $(this).append(that.createDeleteFieldLink());
     });
 }
 
 FormFieldManager.prototype.createAddFieldLink = function() {
-    var $addLink = $('<a href="#" class="btn btn-default add_field_link">Add field</a>');
+    var $addLink = $('<a href="#" class="btn btn-primary add_field_link">Add field</a>');
 
     var that = this;
     $addLink.on('click', function(e) {
@@ -109,7 +109,7 @@ FormFieldManager.prototype.createAddFieldLink = function() {
 }
 
 FormFieldManager.prototype.createDeleteFieldLink = function() {
-    var $deleteLink = $('<a href="#" class="btn btn-default delete_field_link">Delete field</a>');
+    var $deleteLink = $('<a href="#" class="btn btn-danger delete_field_link">Delete field</a>');
 
     $deleteLink.on('click', function(e) {
         e.preventDefault();
