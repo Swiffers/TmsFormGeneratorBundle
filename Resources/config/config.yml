@@ -30,6 +30,10 @@ tms_form_generator:
             abstract: true
             type: form_field_constraints
 
+        form_field_type_choice:
+            abstract: true
+            type: form_field_type_choice
+
         text:
             parent: form
             type: text
@@ -168,6 +172,17 @@ tms_form_generator:
             alias: "Champ de saisie boolean (checkbox)"
             options:
                 value: {"type": "text", "options": {"required": false}}
+
+        repeated:
+            parent: form
+            type: repeated
+            alias: "Champ de saisie répété"
+            options:
+                type: {"type": "form_field_type_choice", "options": {"required": true}}
+                options: {"type": "text", "options": {"required": false}}
+                first_options: {"type": "text", "options": {"required": false}}
+                second_options: {"type": "text", "options": {"required": false}}
+                invalid_message: {"type": "text", "options": {"required": false}}
 
         toggle_button:
             parent: form
