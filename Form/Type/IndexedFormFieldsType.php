@@ -19,19 +19,12 @@ class IndexedFormFieldsType extends FormFieldsType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        parent::setDefaultOptions($resolver);
+
         $resolver->setDefaults(array(
-            'type' => 'form_field',
             'options' => array(
-                'required' => false,
                 'add_indexed_field' => true,
             ),
-            'allow_add' => true,
-            'allow_delete' => true,
-            'by_reference' => false,
-            'cascade_validation' => true,
-            'attr' => array(
-                'class' => 'tms_form_generator_form_fields'
-            )
         ));
     }
 
