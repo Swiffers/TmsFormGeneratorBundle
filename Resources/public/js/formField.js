@@ -95,7 +95,7 @@ FormField.prototype.loadData = function(type) {
 
 function FormFieldManager($container) {
     this.$container = $container;
-    this.initSortable();
+    //this.initSortable();
 
     this.$container.append(this.createAddFieldLink());
     var that = this;
