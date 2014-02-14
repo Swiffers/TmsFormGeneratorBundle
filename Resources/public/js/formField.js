@@ -95,7 +95,28 @@ FormField.prototype.loadData = function(type) {
 
 function FormFieldManager($container) {
     this.$container = $container;
-
+    /*
+    containerId = $container.attr('id');
+    regExp = new RegExp('[^_]*$', 'g');
+    matches = regExp.exec(containerId);
+    var formFieldName = matches[0];
+    var formName = containerId.replace('_'+formFieldName, '');
+    
+    this.$container.sortable({
+        stop: function(e, ui) {
+            $container.find('> fieldset').each(function(index) {
+                regExp = new RegExp('('+formName+'(\\[|_)'+formFieldName+'((\\]\\[)|_))[0-9]*', 'g');
+                updatedPositionContent = $(this).html().replace(regExp, '$1'+index);
+                $(this).empty().append($(updatedPositionContent));
+                
+                    //$(this).html().replace(regExp, '$1'+index)
+                    //$(this).html().replace(/(tms_bundle_operationbundle_formparticipationsteptype(\[|_)contentParameters((\]\[)|_))[0-9]* /g,"$1"+index)
+                //);
+            });
+        }
+    });
+    this.$container.disableSelection();
+    */
     this.$container.append(this.createAddFieldLink());
     var that = this;
     this.$container.find('> fieldset').each(function() {
