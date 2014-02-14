@@ -95,32 +95,37 @@ FormField.prototype.loadData = function(type) {
 
 function FormFieldManager($container) {
     this.$container = $container;
-    /*
+    this.initSortable();
+
+    this.$container.append(this.createAddFieldLink());
+    var that = this;
+    this.$container.find('> fieldset').each(function() {
+        $(this).append(that.createDeleteFieldLink());
+    });
+}
+
+FormFieldManager.prototype.initSortable = function() {
+    var $container = this.$container
     containerId = $container.attr('id');
     regExp = new RegExp('[^_]*$', 'g');
     matches = regExp.exec(containerId);
     var formFieldName = matches[0];
     var formName = containerId.replace('_'+formFieldName, '');
-    
-    this.$container.sortable({
+
+    console.log(formFieldName, formName);
+    $container.sortable({
         stop: function(e, ui) {
-            $container.find('> fieldset').each(function(index) {
-                regExp = new RegExp('('+formName+'(\\[|_)'+formFieldName+'((\\]\\[)|_))[0-9]*', 'g');
-                updatedPositionContent = $(this).html().replace(regExp, '$1'+index);
-                $(this).empty().append($(updatedPositionContent));
-                
-                    //$(this).html().replace(regExp, '$1'+index)
-                    //$(this).html().replace(/(tms_bundle_operationbundle_formparticipationsteptype(\[|_)contentParameters((\]\[)|_))[0-9]* /g,"$1"+index)
-                //);
+            $container.find('> fieldset').each(function(i) {
+                var position = i;
+                var regExp = new RegExp('('+formName+'(\\[)'+formFieldName+'((\\]\\[)))[0-9]*', 'g');
+                $(this).find('.inputs *').each(function() {
+                    name = $(this).attr('name');
+                    if (regExp.test(name)) {
+                        $(this).attr('name', name.replace(regExp, '$1'+position));
+                    }
+                });
             });
         }
-    });
-    this.$container.disableSelection();
-    */
-    this.$container.append(this.createAddFieldLink());
-    var that = this;
-    this.$container.find('> fieldset').each(function() {
-        $(this).append(that.createDeleteFieldLink());
     });
 }
 
