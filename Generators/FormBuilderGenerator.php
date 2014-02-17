@@ -54,7 +54,7 @@ class FormBuilderGenerator implements GeneratorInterface
 
     /**
      * setDefaultFieldOptions
-     *O
+     *
      * @param OptionsResolverInterface $resolver
      */
     protected function setDefaultFieldOptions(OptionsResolverInterface $resolver)
@@ -65,7 +65,6 @@ class FormBuilderGenerator implements GeneratorInterface
             ->setAllowedValues(array('type' => array_keys($this->formFieldTypes)))
             ->setDefaults(array(
                 'options'     => array(),
-                'constraints' => array(),
                 'indexed'     => false
             ))
             ->setNormalizers(array(
