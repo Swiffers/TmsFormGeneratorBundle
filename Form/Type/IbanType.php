@@ -65,16 +65,6 @@ class IbanType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'constraints' => new Iban()
-        ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'iban';

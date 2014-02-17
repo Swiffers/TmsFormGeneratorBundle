@@ -196,11 +196,6 @@ tms_form_generator:
             type: iban
             alias: "Champ de saisie IBAN"
 
-        imei:
-            parent: text
-            type: imei
-            alias: "Champ de saisie IMEI"
-
         html_text:
             type: html_text
             alias: "Texte HTML"
