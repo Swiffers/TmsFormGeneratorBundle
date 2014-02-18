@@ -139,6 +139,17 @@ class FormBuilderGenerator implements GeneratorInterface
             $this->generateFieldConstraints($parameters['options']['constraints']) :
             null
         ;
+
+        // Hack based on html_text type
+        // =>Allow duplication (with a suffix fieldName-x with x in {1..*})
+        if ($parameters['type'] == 'html_text') {
+            $i = 0;
+            while ($formBuilder->has($parameters['name'])) {
+                $i++;
+                $parameters['name'] = sprintf('%s-%d', $parameters['name'], $i);
+            }
+        }
+
         $formBuilder->add($parameters['name'], $parameters['type'], $parameters['options']);
     }
 
