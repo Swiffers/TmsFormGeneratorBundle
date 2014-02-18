@@ -31,6 +31,8 @@ class FormFieldTypeChoiceType extends AbstractType
                 $this->formFieldTypes[$id] = $alias;
             }
         }
+
+        asort($this->formFieldTypes);
     }
 
     /**

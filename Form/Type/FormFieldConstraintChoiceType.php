@@ -29,6 +29,8 @@ class FormFieldConstraintChoiceType extends AbstractType
             $alias = isset($formFieldConstraint['alias']) ? $formFieldConstraint['alias'] : $id;
             $this->formFieldConstraints[$id] = $alias;
         }
+
+        asort($this->formFieldConstraints);
     }
 
     /**
