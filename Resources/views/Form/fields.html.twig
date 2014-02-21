@@ -99,6 +99,88 @@
     </div>
 {% endblock %}
 
+{% block iban_widget %}
+    {{ form_widget(form) }}
+    <script type="text/javascript">
+        $('document').ready(function() {
+            var $form = $('#{{ id }}').closest('form');
+            var $inputs = $form.find('input');
+
+            getCursorPosition = function($element) {
+                var element = $element.get(0);
+                if ('selectionStart' in element) {
+                    // Standard-compliant browsers
+                    return element.selectionStart;
+                } else if (document.selection) {
+                    // IE
+                    element.focus();
+                    var sel = document.selection.createRange();
+                    var selLen = document.selection.createRange().text.length;
+                    sel.moveStart('character', -element.value.length);
+                    return sel.text.length - selLen;
+                }
+            };
+
+            $inputs.each(function() {
+                $(this).on('keyup', function(event) {
+
+                    // Skip the tab and shift keys
+                    if (event.keyCode === 9 || event.keyCode === 16) {
+                        return;
+                    }
+
+                    var $prev = $(this).parent().prev().children('input');
+                    var $next = $(this).parent().next().children('input');
+                    var maxlength = parseInt($(this).attr('maxlength'), 10);
+
+                    // Left arrow
+                    if (event.keyCode === 37) {
+                        if ('undefined' !== typeof $prev.get(0) && getCursorPosition($(this)) === 0) {
+                            $prev.focus();
+                        }
+
+                        return;
+                    }
+
+                    // Right arrow
+                    if (event.keyCode === 39) {
+                        if ('undefined' !== typeof $next.get(0) && getCursorPosition($(this)) >= maxlength) {
+                            $next.focus();
+                        }
+
+                        return;
+                    }
+
+                    // Delete key
+                    if (event.keyCode === 8) {
+                        if (0 === $(this).val().length) {
+                            if ('undefined' !== typeof $prev.get(0)) {
+                                $prev.focus();
+        
+                                return;
+                            }
+                        }
+                    }
+
+                    // All the other user inputs
+                    if (maxlength === $(this).val().length) {
+                        if ('undefined' !== typeof $next.get(0)) {
+                            $next.focus();
+
+                            return;
+                        }
+                    }
+                });
+            });
+
+            // Place the cursor after the default value on the first element (e.g.: after "FR") when it gets the focus
+            $inputs.first().on('focus', function() {
+                $(this).get(0).selectionStart = $(this).val().length;
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block sfr_repayment_mode_row %}
     {{ form_widget(form) }}
 {% endblock %}
