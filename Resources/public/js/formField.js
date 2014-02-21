@@ -112,16 +112,18 @@ FormFieldManager.prototype.initSortable = function() {
     var formFieldName = matches[0];
     var formName = containerId.replace('_'+formFieldName, '');
 
-    console.log(formFieldName, formName);
     $container.sortable({
         stop: function(e, ui) {
-            $container.find('> fieldset').each(function(i) {
-                var position = i;
-                var regExp = new RegExp('('+formName+'(\\[)'+formFieldName+'((\\]\\[)))[0-9]*', 'g');
+            $container.find('> fieldset').each(function(position) {
+                //var regExp = new RegExp('('+formName+'(\\[)'+formFieldName+'((\\]\\[)))[0-9]*', 'g');
+                var regExp = new RegExp('('+formName+'\\['+formFieldName+'\\]\\[)([0-9]*)');
                 $(this).find('.inputs *').each(function() {
                     name = $(this).attr('name');
-                    if (regExp.test(name)) {
-                        $(this).attr('name', name.replace(regExp, '$1'+position));
+                    if (name && regExp.test(name)) {
+                        matches = name.match(regExp);
+                        if (matches[2] != position) {
+                            $(this).attr('name', name.replace(regExp, '$1'+position));
+                        }
                     }
                 });
             });
