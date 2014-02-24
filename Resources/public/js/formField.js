@@ -95,7 +95,7 @@ FormField.prototype.loadData = function(type) {
 
 function FormFieldManager($container) {
     this.$container = $container;
-    //this.initSortable();
+    this.initSortable();
 
     this.$container.append(this.createAddFieldLink());
     var that = this;
@@ -111,18 +111,28 @@ FormFieldManager.prototype.initSortable = function() {
     matches = regExp.exec(containerId);
     var formFieldName = matches[0];
     var formName = containerId.replace('_'+formFieldName, '');
+    var checkedToKeep = {};
 
     $container.sortable({
         stop: function(e, ui) {
             $container.find('> fieldset').each(function(position) {
-                //var regExp = new RegExp('('+formName+'(\\[)'+formFieldName+'((\\]\\[)))[0-9]*', 'g');
                 var regExp = new RegExp('('+formName+'\\['+formFieldName+'\\]\\[)([0-9]*)');
                 $(this).find('.inputs *').each(function() {
                     name = $(this).attr('name');
                     if (name && regExp.test(name)) {
                         matches = name.match(regExp);
                         if (matches[2] != position) {
-                            $(this).attr('name', name.replace(regExp, '$1'+position));
+                            var newName = name.replace(regExp, '$1'+position);
+                            $container.find('> fieldset *[name="'+newName+'"]').each(function() {
+                                if($(this).prop('checked')) {
+                                    checkedToKeep[$(this).attr('id')] = true;
+                                }
+                            });
+
+                            $(this).attr('name', newName);
+                            if(checkedToKeep[$(this).attr('id')]) {
+                                $(this).prop('checked', true);
+                            }
                         }
                     }
                 });
