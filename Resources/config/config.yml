@@ -75,6 +75,7 @@ tms_form_generator:
             alias: "Champ de saisie nombre entier"
             options:
                 precision: {"type": "number", "options": {"required": false, "data": 2}}
+                invalid_message: {"type": "text", "options": {"required": false}}
 
         money:
             parent: form
@@ -83,6 +84,7 @@ tms_form_generator:
             options:
                 currency: {"type": "text", "options": {"required": false, "data": "EUR"}}
                 precision: {"type": "number", "options": {"required": false, "data": 2}}
+                invalid_message: {"type": "text", "options": {"required": false}}
 
         number:
             parent: form
@@ -90,6 +92,7 @@ tms_form_generator:
             alias: "Champ de saisie nombre décimal"
             options:
                 precision: {"type": "number", "options": {"required": false, "data": 2}}
+                invalid_message: {"type": "text", "options": {"required": false}}
 
         password:
             parent: text
@@ -105,6 +108,7 @@ tms_form_generator:
             options:
                 type: {"type": "text", "options": {"required": false}}
                 precision: {"type": "number", "options": {"required": false, "data": 0}}
+                invalid_message: {"type": "text", "options": {"required": false}}
 
         choice:
             parent: form
@@ -129,6 +133,7 @@ tms_form_generator:
                 months: {"type": "text", "options": {"required": false}}
                 days: {"type": "text", "options": {"required": false}}
                 empty_value: {"type": "text", "options": {"required": false}}
+                invalid_message: {"type": "text", "options": {"required": false}}
 
         time:
             parent: form
@@ -142,6 +147,7 @@ tms_form_generator:
                 minutes: {"type": "text", "options": {"required": false}}
                 seconds: {"type": "text", "options": {"required": false}}
                 empty_value: {"type": "text", "options": {"required": false}}
+                invalid_message: {"type": "text", "options": {"required": false}}
 
         datetime:
             parent: form
@@ -160,6 +166,7 @@ tms_form_generator:
                 seconds: {"type": "text", "options": {"required": false}}
                 with_seconds: {"type": "toggle_button", "options": {"required": false}}
                 empty_value: {"type": "text", "options": {"required": false}}
+                invalid_message: {"type": "text", "options": {"required": false}}
 
         birthday:
             parent: date
