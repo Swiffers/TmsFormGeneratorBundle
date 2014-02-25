@@ -71,7 +71,7 @@ FormField.prototype.loadData = function(type) {
     var request = $.ajax({
         url: this.ajaxUrl,
         type: "GET",
-        data: { name: this.id, type: type, data: btoa(data) },
+        data: { name: this.id, type: type, data: btoa(unescape(encodeURIComponent(data))) },
         dataType: "html"
     });
 

@@ -28,7 +28,6 @@ class GeneratorController extends Controller
         $name = $request->query->get('name');
         $type = $request->query->get('type');
         $data = urldecode(base64_decode($request->query->get('data')));
-        $data = mb_convert_encoding($data, "UTF-8", "ISO-8859-1");
         $data = json_decode($data, true);
 
         $formFieldTypeServiceName = sprintf('tms_form_generator.form_field.type.%s', $type);
