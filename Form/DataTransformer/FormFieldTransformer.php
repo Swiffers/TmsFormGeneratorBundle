@@ -106,7 +106,19 @@ class FormFieldTransformer implements DataTransformerInterface
      */
     protected static function isValidJson($toCheck)
     {
-         return !empty($toCheck) && is_string($toCheck) && is_array(json_decode($toCheck, true)) && json_last_error() == 0;
+        if (empty($toCheck) || !is_string($toCheck)) {
+            return false;
+        }
+
+        $regexString = '"([^"\\\\]*|\\\\["\\\\bfnrt\/]|\\\\u[0-9a-f]{4})*"';
+        $regexNumber = '-?(?=[1-9]|0(?!\d))\d+(\.\d+)?([eE][+-]?\d+)?';
+        $regexBoolean= 'true|false|null'; // these are actually copied from Mario's answer
+        $regex = '/\A('.$regexString.'|'.$regexNumber.'|'.$regexBoolean.'|';    //string, number, boolean
+        $regex.= '\[(?:(?1)(?:,(?1))*)?\s*\]|'; //arrays
+        $regex.= '\{(?:\s*'.$regexString.'\s*:(?1)(?:,\s*'.$regexString.'\s*:(?1))*)?\s*\}';    //objects
+        $regex.= ')\Z/is';
+
+        return preg_match($regex, $toCheck);
     }
 }
 
