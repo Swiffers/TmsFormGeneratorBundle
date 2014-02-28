@@ -60,7 +60,6 @@ class GeneratorController extends Controller
         $name = $request->query->get('name');
         $constraint = $request->query->get('constraint');
         $data = urldecode(base64_decode($request->query->get('data')));
-        $data = mb_convert_encoding($data, "UTF-8", "ISO-8859-1");
         $data = json_decode($data, true);
 
         $formFieldConstraintServiceName = sprintf('tms_form_generator.form_field.constraint.%s', $constraint);
