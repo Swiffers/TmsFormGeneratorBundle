@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Tms\Bundle\FormGeneratorBundle\Form\DataTransformer\FormFieldTransformer;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class FormFieldType extends AbstractType
 {
@@ -62,7 +63,8 @@ class FormFieldType extends AbstractType
                 'name_field' => function (Options $options, $value) {
                     if ($value) {
                         $value['options'] = array_merge($value['options'], array(
-                            'attr' => array('class' => 'form_field_name')
+                            'attr'        => array('class' => 'form_field_name'),
+                            'constraints' => array(new NotBlank())
                         ));
                     }
 
