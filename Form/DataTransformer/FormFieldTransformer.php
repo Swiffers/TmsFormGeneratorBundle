@@ -57,7 +57,7 @@ class FormFieldTransformer implements DataTransformerInterface
         $reverseTransformed = array();
         foreach ($out as $k => $v) {
             if (self::isValidJson($v)) {
-                $v = json_decode($v, true);
+                $v = json_decode($v);
             }
 
             if ($k === "indexed") {
@@ -93,8 +93,14 @@ class FormFieldTransformer implements DataTransformerInterface
     {
         foreach ($options as $k => $v) {
             if (self::isValidJson($v)) {
-                $options[$k] = json_decode($v, true);
+                $v = json_decode($v);
             }
+
+            if (is_array($v)) {
+                self::reverseTransformOptions($v);
+            }
+
+            $options[$k] = $v;
         }
     }
 
