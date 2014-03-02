@@ -477,8 +477,8 @@ tms_form_generator:
             alias: "file"
             options:
                 maxSize: {"type": "text", "options": {"required": false}}
-                mimeTypes: {"type": "text", "options": {"required": false}}
                 maxSizeMessage: {"type": "text", "options": {"required": false}}
+                mimeTypes: {"type": "text", "options": {"required": false}}
                 mimeTypesMessage: {"type": "text", "options": {"required": false}}
                 notFoundMessage: {"type": "text", "options": {"required": false}}
                 notReadableMessage: {"type": "text", "options": {"required": false}}
@@ -491,16 +491,16 @@ tms_form_generator:
             alias: "image"
             options:
                 mimeTypes: {"type": "text", "options": {"required": false}}
-                minWidth: {"type": "number", "options": {"required": false}}
-                maxWidth: {"type": "number", "options": {"required": false}}
-                maxHeight: {"type": "number", "options": {"required": false}}
-                minHeight: {"type": "number", "options": {"required": false}}
                 mimeTypesMessage: {"type": "text", "options": {"required": false}}
-                sizeNotDetectedMessage: {"type": "text", "options": {"required": false}}
-                maxWidthMessage: {"type": "text", "options": {"required": false}}
+                minWidth: {"type": "number", "options": {"required": false}}
                 minWidthMessage: {"type": "text", "options": {"required": false}}
-                maxHeightMessage: {"type": "text", "options": {"required": false}}
+                maxWidth: {"type": "number", "options": {"required": false}}
+                maxWidthMessage: {"type": "text", "options": {"required": false}}
+                minHeight: {"type": "number", "options": {"required": false}}
                 minHeightMessage: {"type": "text", "options": {"required": false}}
+                maxHeight: {"type": "number", "options": {"required": false}}
+                maxHeightMessage: {"type": "text", "options": {"required": false}}
+                sizeNotDetectedMessage: {"type": "text", "options": {"required": false}}
 
         card_scheme:
             class: \Symfony\Component\Validator\Constraints\CardScheme
