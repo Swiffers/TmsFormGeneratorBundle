@@ -538,9 +538,3 @@ tms_form_generator:
                 message: {"type": "text", "options": {"required": false}}
                 caseSensitive: {"type": "toggle_button", "options": {"required": false}}
                 requireHyphen: {"type": "toggle_button", "options": {"required": false}}
-
-        ean13:
-            class: \Tms\Bundle\FormGeneratorBundle\Validator\Constraints\Ean13Constraint
-            alias: "ean13"
-            options:
-                message: {"type": "text", "options": {"required": false}}
