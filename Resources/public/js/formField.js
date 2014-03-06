@@ -105,6 +105,15 @@ function FormFieldManager($container) {
 }
 
 FormFieldManager.prototype.initSortable = function() {
+    var that = this;
+    this.$container.sortable({
+        stop: function(e, ui) {
+            that.updateFieldsetPosition();
+        }
+    });
+}
+
+FormFieldManager.prototype.updateFieldsetPosition = function() {
     var $container = this.$container
     containerId = $container.attr('id');
     regExp = new RegExp('[^_]*$', 'g');
@@ -113,31 +122,47 @@ FormFieldManager.prototype.initSortable = function() {
     var formName = containerId.replace('_'+formFieldName, '');
     var checkedToKeep = {};
 
-    $container.sortable({
-        stop: function(e, ui) {
-            $container.find('> fieldset').each(function(position) {
-                var regExp = new RegExp('('+formName+'\\['+formFieldName+'\\]\\[)([0-9]*)');
-                $(this).find('.inputs *').each(function() {
-                    name = $(this).attr('name');
-                    if (name && regExp.test(name)) {
-                        matches = name.match(regExp);
-                        if (matches[2] != position) {
-                            var newName = name.replace(regExp, '$1'+position);
-                            $container.find('> fieldset *[name="'+newName+'"]').each(function() {
-                                if($(this).prop('checked')) {
-                                    checkedToKeep[$(this).attr('id')] = true;
-                                }
-                            });
+    $container.find('> fieldset').each(function(position) {
+        var nameRegExp = new RegExp('('+formName+'\\['+formFieldName+'\\]\\[)([0-9]*)');
+        var idRegExp = new RegExp('('+formName+'_'+formFieldName+'_)([0-9]*)');
+        $(this).find('.inputs *').each(function() {
+            _name = $(this).attr('name');
+            _id = $(this).attr('id');
+            _for = $(this).attr('for');
 
-                            $(this).attr('name', newName);
-                            if(checkedToKeep[$(this).attr('id')]) {
-                                $(this).prop('checked', true);
-                            }
+            if (_name && nameRegExp.test(_name)) {
+                matches = _name.match(nameRegExp);
+                if (matches[2] != position) {
+                    var newName = _name.replace(nameRegExp, '$1'+position);
+                    $container.find('> fieldset *[name="'+newName+'"]').each(function() {
+                        if($(this).prop('checked')) {
+                            checkedToKeep[$(this).attr('id')] = true;
                         }
+                    });
+
+                    $(this).attr('name', newName);
+                    if(checkedToKeep[$(this).attr('id')]) {
+                        $(this).prop('checked', true);
                     }
-                });
-            });
-        }
+                }
+            }
+
+            if (_id && idRegExp.test(_id)) {
+                matches = _id.match(idRegExp);
+                if (matches[2] != position) {
+                    var newId = _id.replace(idRegExp, '$1'+position);
+                    $(this).attr('id', newId);
+                }
+            }
+
+            if (_for && idRegExp.test(_for)) {
+                matches = _for.match(idRegExp);
+                if (matches[2] != position) {
+                    var newFor = _for.replace(idRegExp, '$1'+position);
+                    $(this).attr('for', newFor);
+                }
+            }
+        });
     });
 }
 
@@ -147,6 +172,7 @@ FormFieldManager.prototype.createAddFieldLink = function() {
     var that = this;
     $addLink.on('click', function(e) {
         e.preventDefault();
+        that.updateFieldsetPosition();
         that.addField($(this));
     });
 
@@ -154,11 +180,13 @@ FormFieldManager.prototype.createAddFieldLink = function() {
 }
 
 FormFieldManager.prototype.createDeleteFieldLink = function() {
+    var that = this;
     var $deleteLink = $('<a href="#" class="btn btn-danger delete_field_link">Delete field</a>');
 
     $deleteLink.on('click', function(e) {
         e.preventDefault();
         $(this).closest('fieldset').remove();
+        that.updateFieldsetPosition();
     });
 
     return $deleteLink;
@@ -167,7 +195,7 @@ FormFieldManager.prototype.createDeleteFieldLink = function() {
 FormFieldManager.prototype.createPrototypeForm = function() {
     var prototype = this.$container.attr('data-prototype');
 
-    return $(prototype.replace(/__name__/g, this.$container.children().length));
+    return $(prototype.replace(/__name__/g, this.$container.children().length-1));
 }
 
 FormFieldManager.prototype.addField = function($addLink) {
