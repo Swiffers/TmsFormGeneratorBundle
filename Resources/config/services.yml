@@ -86,10 +86,10 @@ services:
         tags:
             - { name: form.type, alias: iban }
 
-    form.type.imei:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\ImeiType
+    form.type.hidden_duplication:
+        class: Tms\Bundle\FormGeneratorBundle\Form\Type\HiddenDuplicationType
         tags:
-            - { name: form.type, alias: imei }
+            - { name: form.type, alias: hidden_duplication }
 
     form.type.sfr_repayment_mode:
         class: Tms\Bundle\FormGeneratorBundle\Form\Type\SfrRepaymentModeType

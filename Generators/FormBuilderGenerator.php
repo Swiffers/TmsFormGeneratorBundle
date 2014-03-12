@@ -123,6 +123,8 @@ class FormBuilderGenerator implements GeneratorInterface
             $this->generateField($formBuilder, $field);
         }
 
+        $formBuilder->addEventSubscriber(new FormBuilderGeneratorSubscriber());
+
         return $formBuilder;
     }
 

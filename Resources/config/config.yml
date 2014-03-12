@@ -236,6 +236,13 @@ tms_form_generator:
             type: hidden
             alias: "Champ invisible"
 
+        hidden_duplication:
+            parent: hidden
+            type: hidden_duplication
+            alias: "Champ de duplication invisible"
+            options:
+                source_field_name: {"type": "text", "options": {"required": true}}
+
         sfr_repayment_mode:
             type: sfr_repayment_mode
             alias: "SFR script pour le mode de remboursement"
