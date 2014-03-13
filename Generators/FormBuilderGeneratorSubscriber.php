@@ -25,13 +25,14 @@ class FormBuilderGeneratorSubscriber implements EventSubscriberInterface
             FormEvents::POST_SUBMIT
         */
         return array(
-            FormEvents::POST_SUBMIT => 'postSubmit'
+            FormEvents::PRE_SUBMIT => 'preSubmit'
         );
     }
 
-    public function postSubmit(FormEvent $event)
+    public function preSubmit(FormEvent $event)
     {
         $data = $event->getData();
+
         foreach ($event->getForm()->all() as $field) {
             $config = $field->getConfig();
             if ($config->getType()->getInnerType() instanceof HiddenDuplicationType) {
@@ -39,5 +40,7 @@ class FormBuilderGeneratorSubscriber implements EventSubscriberInterface
                 $data[$config->getName()] = $data[$sourceFieldName];
             }
         }
+
+        $event->setData($data);
     }
 }
