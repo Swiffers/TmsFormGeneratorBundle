@@ -16,8 +16,10 @@ class DateGreaterThanOrEqualValidator extends GreaterThanOrEqualValidator
      */
     protected function compareValues($value1, $value2)
     {
-        $value2 = new \DateTime($value2);
-        if (!$value2) {
+        $value1 = DateValidatorTool::cleanDateValue($value1);
+        $value2 = DateValidatorTool::cleanDateValue($value2);
+
+        if (!$value1 || !$value2) {
             return false;
         }
 
