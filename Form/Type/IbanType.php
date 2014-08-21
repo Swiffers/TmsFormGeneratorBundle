@@ -56,8 +56,13 @@ class IbanType extends AbstractType
             ))
             ->add('c7', 'text', array(
                 'label'      => ' ',
-                'attr'       => array('style' => 'width: 10em;'),
-                'max_length' => 10
+                'attr'       => array('style' => 'width: 3.5em;'),
+                'max_length' => 3
+            ))
+            ->add('c8', 'text', array(
+                'label'      => ' ',
+                'attr'       => array('style' => 'width: 6em;background:#DDD;'),
+                'max_length' => 7
             ))
         ;
     }
