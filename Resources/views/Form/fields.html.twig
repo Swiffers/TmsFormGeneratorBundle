@@ -206,6 +206,7 @@
                     $ibanField.find('input').removeAttr('required');
                 } else {
                     $ibanField.find('input').attr('required', 'required');
+                    $ibanField.find('input:last').removeAttr('required');
                 }
 
                 repaymentModeFieldValue = isChecked ? "{{ checked_repayment_mode_value }}" : "{{ unchecked_repayment_mode_value }}";
@@ -219,6 +220,7 @@
                 ;
             } else {
                 $ibanField.find('input').attr('required', 'required');
+                $ibanField.find('input:last').removeAttr('required');
             }
 
             $form.on('submit', function(event) {
@@ -229,22 +231,18 @@
                 event.preventDefault();
                 var form = $(this);
                 var $modal = $('\
-                    <div id="tms_confirm_action_modal" tabindex="-1" class="modal fade">\
-                        <div class="modal-dialog">\
-                            <div class="modal-content">\
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
-                                <div class="content"></div>\
-                                <div class="actions"></div>\
-                            <div>\
+                    <div id="tms_confirm_action_modal" class="reveal-modal" data-reveal>\
+                        <div class="modal-content">\
+                            <div class="content"></div>\
+                            <div class="actions"></div>\
                         <div>\
+                        <a class="close-reveal-modal">&#215;</a>\
                     </div>\
                 ');
-                $modal.on('hidden.bs.modal', function () {
-                    $(this).remove();
-                });
+
                 $modal.find('.modal-content .content').append("<h2>Vous avez choisi de recevoir votre remboursement par lettre-chèque.</h2>");
 
-                var $confirmSwitch = $('<a href="#confirmSwitch">Confirmer</a>');
+                var $confirmSwitch = $('<a href="#confirmSwitch" class="btn-base btn-primary btn-normal btn-touch">Confirmer</a>');
                 $confirmSwitch.on('click', function(event) {
                     event.preventDefault();
                     form.off('submit');
@@ -252,17 +250,24 @@
                 });
                 $modal.find('.modal-content .actions').append($confirmSwitch);
 
-                var $cancelSwitch = $('<a href="#cancelSwitch">Saisir mon IBAN</a>');
+                var $cancelSwitch = $('<a href="#cancelSwitch" class="btn-base btn-primary btn-normal btn-touch">Saisir mon IBAN</a>');
                 $cancelSwitch.on('click', function(event) {
                     event.preventDefault();
-                    $modal.modal('hide');
+                    // Bootstrap : $modal.modal('hide');
+                    $modal.foundation('reveal', 'close');
                     $sfr_repayment_mode.prop('checked', false);
                     $sfr_repayment_mode.change();
                 });
                 $modal.find('.modal-content .actions').append($cancelSwitch);
 
                 $('body').append($modal);
-                $modal.modal('show');
+
+                // Bootstrap : $modal.modal('show');
+                $modal.foundation('reveal', 'open');
+                // Bootstrap : $modal.on('hidden.bs.modal', function () {
+                $(document).on('closed.fndtn.reveal', '[data-reveal]', function () {
+                    $(this).remove();
+                });
             });
 
             $container = $('<ul><li></li></ul>');
@@ -271,3 +276,4 @@
         });
     </script>
 {% endblock %}
+
