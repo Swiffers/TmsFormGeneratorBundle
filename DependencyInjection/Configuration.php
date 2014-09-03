@@ -24,6 +24,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->append($this->addFormFieldTypesNode())
                 ->append($this->addFormFieldConstraintsNode())
+                ->append($this->addStepHandlersNode())
             ->end()
         ;
 
@@ -85,6 +86,26 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                     ->scalarNode('alias')->defaultNull()->end()
+                ->end()
+            ->end()
+        ;
+
+        return $node;
+    }
+
+    protected function addStepHandlersNode()
+    {
+        $builder = new TreeBuilder();
+        $node = $builder->root('step_handlers');
+
+        $node
+            ->defaultValue(array())
+            ->useAttributeAsKey('key')
+            ->prototype('array')
+                ->children()
+                    ->scalarNode('name')->isRequired()->end()
+                    ->scalarNode('configuration_form_class')->isRequired()->end()
+                    ->scalarNode('icon')->defaultValue('glyphicon-question-sign')->end()
                 ->end()
             ->end()
         ;

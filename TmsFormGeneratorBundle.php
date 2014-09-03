@@ -6,6 +6,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Tms\Bundle\FormGeneratorBundle\DependencyInjection\Compiler\FormFieldTypeCompilerPass;
 use Tms\Bundle\FormGeneratorBundle\DependencyInjection\Compiler\FormFieldConstraintCompilerPass;
+use Tms\Bundle\FormGeneratorBundle\DependencyInjection\Compiler\StepHandlerCompilerPass;
 
 class TmsFormGeneratorBundle extends Bundle
 {
@@ -15,5 +16,6 @@ class TmsFormGeneratorBundle extends Bundle
 
         $container->addCompilerPass(new FormFieldTypeCompilerPass());
         $container->addCompilerPass(new FormFieldConstraintCompilerPass());
+        $container->addCompilerPass(new StepHandlerCompilerPass());
     }
 }

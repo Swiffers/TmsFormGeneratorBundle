@@ -34,5 +34,10 @@ class TmsFormGeneratorExtension extends Extension
             'tms_form_generator.form_field_constraints',
             $config['form_field_constraints']
         );
+
+        $container->setParameter(
+            'tms_form_generator.step_handlers',
+            $config['step_handlers']
+        );
     }
 }

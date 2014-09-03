@@ -6,92 +6,100 @@ services:
         class:     %tms_form_generator.form_builder_generator.class%
         arguments: [@form.factory, @tms_form_generator.form_field.container.constraint, %tms_form_generator.form_field_types%]
 
+    tms_form_generator.step.container:
+        class:     Tms\Bundle\FormGeneratorBundle\Step\StepContainer
+
+    tms_form_generator.step.handler:
+        class:     Tms\Bundle\FormGeneratorBundle\Step\StepHandler
+        abstract:  true
+        arguments: [@form.factory, null, null]
+
     tms_form_generator.form_field.container.constraint:
         class:     Tms\Bundle\FormGeneratorBundle\Form\Field\FormFieldConstraintContainer
 
     tms_form_generator.form_field.type:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Field\FormFieldType
-        abstract: true
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Field\FormFieldType
+        abstract:  true
         arguments: [null, null, null]
 
     tms_form_generator.form_field.constraint:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Field\FormFieldConstraint
-        abstract: true
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Field\FormFieldConstraint
+        abstract:  true
         arguments: [null, null]
 
     tms_form_generator.form.extension.help:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\Extension\HelpMessageTypeExtension
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\Extension\HelpMessageTypeExtension
         tags:
           - { name: "form.type_extension", alias: "form" }
 
     tms_form_generator.form.type.form_field:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldType
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldType
         tags:
             - { name: form.type, alias: form_field }
 
     tms_form_generator.form.type.form_fields:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldsType
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldsType
         tags:
             - { name: form.type, alias: form_fields }
 
     tms_form_generator.form.type.indexed_form_fields:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\IndexedFormFieldsType
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\IndexedFormFieldsType
         tags:
             - { name: form.type, alias: indexed_form_fields }
 
     tms_form_generator.form.type.form_field_type_choice:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldTypeChoiceType
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldTypeChoiceType
         arguments: [%tms_form_generator.form_field_types%]
         tags:
             - { name: form.type, alias: form_field_type_choice }
 
     tms_form_generator.form.type.form_field_options:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldOptionsType
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldOptionsType
         tags:
             - { name: form.type, alias: form_field_options }
 
     tms_form_generator.form.type.form_field_constraint_choice:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintChoiceType
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintChoiceType
         arguments: [%tms_form_generator.form_field_constraints%]
         tags:
             - { name: form.type, alias: form_field_constraint_choice }
 
     tms_form_generator.form.type.form_field_constraint:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintType
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintType
         tags:
             - { name: form.type, alias: form_field_constraint }
 
     tms_form_generator.form.type.form_field_constraint_options:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintOptionsType
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintOptionsType
         tags:
             - { name: form.type, alias: form_field_constraint_options }
 
     tms_form_generator.form.type.form_field_constraints:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintsType
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\FormFieldConstraintsType
         tags:
             - { name: form.type, alias: form_field_constraints }
 
     form.type.html_text:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\HtmlTextType
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\HtmlTextType
         tags:
             - { name: form.type, alias: html_text }
 
     form.type.toggle_button:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\ToggleButtonType
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\ToggleButtonType
         tags:
             - { name: form.type, alias: toggle_button }
 
     form.type.iban:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\IbanType
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\IbanType
         tags:
             - { name: form.type, alias: iban }
 
     form.type.hidden_duplication:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\HiddenDuplicationType
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\HiddenDuplicationType
         tags:
             - { name: form.type, alias: hidden_duplication }
 
     form.type.sfr_repayment_mode:
-        class: Tms\Bundle\FormGeneratorBundle\Form\Type\SfrRepaymentModeType
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\SfrRepaymentModeType
         tags:
             - { name: form.type, alias: sfr_repayment_mode }
