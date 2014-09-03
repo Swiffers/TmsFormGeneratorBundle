@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ * @license: GPL
+ */
+
 namespace Tms\Bundle\FormGeneratorBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
