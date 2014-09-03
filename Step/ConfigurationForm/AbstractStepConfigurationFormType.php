@@ -9,6 +9,7 @@ namespace Tms\Bundle\FormGeneratorBundle\Step\ConfigurationForm;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 abstract class AbstractStepConfigurationFormType extends AbstractType
 {
@@ -19,24 +20,28 @@ abstract class AbstractStepConfigurationFormType extends AbstractType
     {
         $builder
             ->add('name', 'text')
-            ->add('description', 'textarea')
-            ->add('position', 'integer')
         ;
 
-        if($this->hasGenerationParameters()) {
-            $builder->add(
-                'generationParameters',
-                $this->getGenerationParametersType(),
-                $this->getGenerationParameters()
-            );
-        }
+        if (!$options['display_simplified_form']) {
+            $builder->add('description', 'textarea');
 
-        if($this->hasContentParameters()) {
-            $builder->add(
-                'contentParameters',
-                $this->getContentParametersType(),
-                $this->getContentParameters()
-            );
+            if($this->hasGenerationParameters()) {
+                $builder->add(
+                    'generationParameters',
+                    $this->getGenerationParametersType(),
+                    $this->getGenerationParameters()
+                );
+            }
+
+            if($this->hasContentParameters()) {
+                $builder->add(
+                    'contentParameters',
+                    $this->getContentParametersType(),
+                    $this->getContentParameters()
+                );
+            }
+        } else {
+            $builder->add('handlerServiceId', 'step_choice');
         }
     }
 
@@ -46,7 +51,8 @@ abstract class AbstractStepConfigurationFormType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Tms\Bundle\FormGeneratorBundle\Step\StepInterface'
+            'display_simplified_form' => false,
+            'data_class' => 'Tms\Bundle\FormGeneratorBundle\Step\Step'
         ));
     }
 

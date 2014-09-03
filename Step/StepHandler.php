@@ -8,7 +8,6 @@
 namespace Tms\Bundle\FormGeneratorBundle\Step;
 
 use Symfony\Component\Form\FormFactory;
-use Tms\Bundle\FormGeneratorBundle\Exception\UndefinedStepHandlerConfigurationFormClassException
 
 class StepHandler implements StepHandlerInterface
 {
@@ -91,11 +90,7 @@ class StepHandler implements StepHandlerInterface
     {
         $formClassName = $this->parameters['configuration_form_class'];
 
-        try {
-            return new $formClassName();
-        } catch(\Exception $e) {
-            throw new UndefinedStepHandlerConfigurationFormClassException($formClassName);
-        }
+        return new $formClassName();
     }
 
     /**
