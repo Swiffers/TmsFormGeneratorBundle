@@ -38,7 +38,7 @@ class StepHandler implements StepHandlerInterface
      *
      * @return FormFactory
      */
-    public function getFormFactory()
+    protected function getFormFactory()
     {
         return $this->formFactory;
     }
@@ -84,11 +84,13 @@ class StepHandler implements StepHandlerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get configuration form type
+     *
+     * @return Symfony\Component\Form\AbstractType
      */
-    public function getFormType()
+    public function getConfigurationFormType()
     {
-        $formClassName = $this->parameters['configuration_form_class'];
+        $formClassName = $this->parameters['configuration_form_type'];
 
         return new $formClassName();
     }
@@ -99,7 +101,7 @@ class StepHandler implements StepHandlerInterface
     public function getConfigurationForm(StepInterface $step, array $options = array())
     {
         return $this->getFormFactory()->create(
-            $this->getFormType(),
+            $this->getConfigurationFormType(),
             $step,
             $options
         );

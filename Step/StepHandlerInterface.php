@@ -24,13 +24,6 @@ interface StepHandlerInterface
     public function getName();
 
     /**
-     * Get form type
-     *
-     * @return Symfony\Component\Form\AbstractType
-     */
-    public function getFormType();
-
-    /**
      * Get configuration form
      *
      * @param StepInterface $step

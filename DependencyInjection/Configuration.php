@@ -104,7 +104,7 @@ class Configuration implements ConfigurationInterface
             ->prototype('array')
                 ->children()
                     ->scalarNode('name')->isRequired()->end()
-                    ->scalarNode('configuration_form_class')->isRequired()->end()
+                    ->scalarNode('configuration_form_type')->isRequired()->end()
                     ->scalarNode('icon')->defaultValue('glyphicon-question-sign')->end()
                 ->end()
             ->end()

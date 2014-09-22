@@ -23,7 +23,7 @@ abstract class AbstractStepConfigurationFormType extends AbstractType
         ;
 
         if (!$options['display_simplified_form']) {
-            $builder->add('description', 'textarea');
+            $builder->add('description', 'textarea', array('required' => false));
 
             if($this->hasGenerationParameters()) {
                 $builder->add(

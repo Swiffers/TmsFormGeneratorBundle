@@ -17,10 +17,11 @@ tms_form_generator:
             type: form
             options:
                 label: {"type": "text", "options": {"required": false}}
-                required: {"type": "toggle_button", "options": {"required": false}}
-                disabled: {"type": "toggle_button", "options": {"required": false}}
-                read_only: {"type": "toggle_button", "options": {"required": false}}
-                error_bubbling: {"type": "toggle_button", "options": {"required": false}}
+                required: {"type": "toggle_button", "options": {"required": false, "data": false}}
+                disabled: {"type": "toggle_button", "options": {"required": false, "data": false}}
+                read_only: {"type": "toggle_button", "options": {"required": false, "data": false}}
+                error_bubbling: {"type": "toggle_button", "options": {"required": false, "data": false}}
+                mapped: {"type": "toggle_button", "options": {"required": false, "data": true}}
                 data: {"type": "text", "options": {"required": false}}
                 attr: {"type": "text", "options": {"required": false}}
                 label_attr: {"type": "text", "options": {"required": false}}
@@ -41,7 +42,7 @@ tms_form_generator:
             alias: "Champ de saisie texte"
             options:
                 max_length: {"type": "number", "options": {"required": false}}
-                trim: {"type": "toggle_button", "options": {"required": false}}
+                trim: {"type": "toggle_button", "options": {"required": false, "data": true}}
 
         regexp:
             parent: text
@@ -56,7 +57,7 @@ tms_form_generator:
             alias: "Zone de saisie texte"
             options:
                 max_length: {"type": "number", "options": {"required": false}}
-                trim: {"type": "toggle_button", "options": {"required": false}}
+                trim: {"type": "toggle_button", "options": {"required": false, "data": true}}
 
         email:
             parent: regexp
@@ -209,6 +210,7 @@ tms_form_generator:
             alias: "Texte HTML"
             options:
                 content: {"type": "textarea", "options": {"required": false}}
+                mapped: {"type": "toggle_button", "options": {"required": false, "data": false}}
 
         captcha:
             parent: text

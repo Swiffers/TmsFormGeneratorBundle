@@ -21,8 +21,8 @@ class FormFieldType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new FormFieldTransformer();
-        $builder->addModelTransformer($transformer);
+        //$transformer = new FormFieldTransformer();
+        //$builder->addModelTransformer($transformer);
 
         if ($options['name_field']) {
             $builder->add(
@@ -36,7 +36,7 @@ class FormFieldType extends AbstractType
 
         $builder
             ->add('indexed', $indexedFieldType, array(
-                'attr' => array('class' => 'form_field_indexed')
+                'attr' => array('class' => 'form_field_indexed'),
             ))
             ->add('type', 'form_field_type_choice')
             ->add('options', 'form_field_options')
