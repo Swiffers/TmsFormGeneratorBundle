@@ -21,8 +21,8 @@ class FormFieldType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        //$transformer = new FormFieldTransformer();
-        //$builder->addModelTransformer($transformer);
+        $transformer = new FormFieldTransformer();
+        $builder->addModelTransformer($transformer);
 
         if ($options['name_field']) {
             $builder->add(
