@@ -22,7 +22,7 @@ abstract class AbstractFormStepConfigurationFormType extends AbstractStepConfigu
     /**
      * {@inheritdoc}
      */
-    public function getContentParameters()
+    public function getContentParameters(array $options = array())
     {
         return array();
     }

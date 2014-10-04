@@ -29,7 +29,7 @@ abstract class AbstractStepConfigurationFormType extends AbstractType
                 $builder->add(
                     'generationParameters',
                     $this->getGenerationParametersType(),
-                    $this->getGenerationParameters()
+                    $this->getGenerationParameters($options['generation_options'])
                 );
             }
 
@@ -37,7 +37,7 @@ abstract class AbstractStepConfigurationFormType extends AbstractType
                 $builder->add(
                     'contentParameters',
                     $this->getContentParametersType(),
-                    $this->getContentParameters()
+                    $this->getContentParameters($options['content_options'])
                 );
             }
         } else {
@@ -52,7 +52,9 @@ abstract class AbstractStepConfigurationFormType extends AbstractType
     {
         $resolver->setDefaults(array(
             'display_simplified_form' => false,
-            'data_class' => 'Tms\Bundle\FormGeneratorBundle\Step\Step'
+            'data_class'              => 'Tms\Bundle\FormGeneratorBundle\Step\Step',
+            'generation_options'      => array(),
+            'content_options'         => array()
         ));
     }
 
@@ -107,9 +109,10 @@ abstract class AbstractStepConfigurationFormType extends AbstractType
     /**
      * getGenerationParameters
      *
+     * @param  array $options
      * @return array()
      */
-    public function getGenerationParameters()
+    public function getGenerationParameters(array $options = array())
     {
         return array();
     }
@@ -117,9 +120,10 @@ abstract class AbstractStepConfigurationFormType extends AbstractType
     /**
      * getContentParameters
      *
+     * @param  array $options
      * @return array()
      */
-    public function getContentParameters()
+    public function getContentParameters(array $options = array())
     {
         return array();
     }
