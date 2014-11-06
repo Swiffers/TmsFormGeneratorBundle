@@ -246,6 +246,16 @@ tms_form_generator:
             options:
                 source_field_name: {"type": "text", "options": {"required": true}}
 
+        tms_api_choice:
+            parent: choice
+            type: tms_api_choice
+            alias: "Champ de selection via Api (TMS)"
+            options:
+                endpoint_name: {"type": "text", "options": {"required": true}}
+                path: {"type": "text", "options": {"required": true}}
+                item_value: {"type": "text", "options": {"required": true}}
+                item_label: {"type": "text", "options": {"required": true}}
+
         sfr_repayment_mode:
             type: sfr_repayment_mode
             alias: "SFR script pour le mode de remboursement"

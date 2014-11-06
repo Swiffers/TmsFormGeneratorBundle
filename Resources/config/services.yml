@@ -105,6 +105,12 @@ services:
         tags:
             - { name: form.type, alias: hidden_duplication }
 
+    form.type.tms_api_choice:
+        class:     Tms\Bundle\FormGeneratorBundle\Form\Type\TmsApiChoiceType
+        arguments: [@tms_rest_client.hypermedia.crawler]
+        tags:
+            - { name: form.type, alias: tms_api_choice }
+
     form.type.sfr_repayment_mode:
         class:     Tms\Bundle\FormGeneratorBundle\Form\Type\SfrRepaymentModeType
         tags:
