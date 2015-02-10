@@ -20,14 +20,14 @@ class GeneratorController extends Controller
      * Generate
      *
      * @Route("/field/generate/options", name="tms_form_generator_field_generate_options")
-     * @Method("GET")
+     * @Method("POST")
      * @Template()
      */
     public function generateFieldOptionsAction(Request $request)
     {
-        $name = $request->query->get('name');
-        $type = $request->query->get('type');
-        $data = urldecode(base64_decode($request->query->get('data')));
+        $name = $request->request->get('name');
+        $type = $request->request->get('type');
+        $data = urldecode(base64_decode($request->request->get('data')));
         $data = json_decode($data, true);
 
         $formFieldTypeServiceName = sprintf('tms_form_generator.form_field.type.%s', $type);
@@ -52,14 +52,14 @@ class GeneratorController extends Controller
      * Generate
      *
      * @Route("/constraint/generate/options", name="tms_form_generator_constraint_generate_options")
-     * @Method("GET")
+     * @Method("POST")
      * @Template()
      */
     public function generateConstraintOptionsAction(Request $request)
     {
-        $name = $request->query->get('name');
-        $constraint = $request->query->get('constraint');
-        $data = urldecode(base64_decode($request->query->get('data')));
+        $name = $request->request->get('name');
+        $constraint = $request->request->get('constraint');
+        $data = urldecode(base64_decode($request->request->get('data')));
         $data = json_decode($data, true);
 
         $formFieldConstraintServiceName = sprintf('tms_form_generator.form_field.constraint.%s', $constraint);
