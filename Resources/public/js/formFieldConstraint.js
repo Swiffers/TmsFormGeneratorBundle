@@ -44,7 +44,7 @@ FormFieldConstraint.prototype.loadData = function(constraint) {
 
     var request = $.ajax({
         url: this.ajaxUrl,
-        type: "GET",
+        type: "POST",
         data: { name: this.id, constraint: constraint, data: btoa(unescape(encodeURIComponent(data))) },
         dataType: "html"
     });
