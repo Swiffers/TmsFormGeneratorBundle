@@ -30,7 +30,7 @@ services:
     tms_form_generator.form.extension.help:
         class:     Tms\Bundle\FormGeneratorBundle\Form\Type\Extension\HelpMessageTypeExtension
         tags:
-          - { name: "form.type_extension", alias: "form" }
+          - { name: "form.type_extension", extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
     tms_form_generator.form.type.step_choice:
         class:     Tms\Bundle\FormGeneratorBundle\Form\Type\StepChoiceType

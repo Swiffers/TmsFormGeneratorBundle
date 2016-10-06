@@ -4,7 +4,8 @@ namespace Tms\Bundle\FormGeneratorBundle\Form\Type\Extension;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 /**
 * @author Benjamin TARDY <benjamin.tardy@tessi.fr>
@@ -14,9 +15,9 @@ class HelpMessageTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setOptional(array('help'));
+        $resolver->setDefined('help');
     }
 
     /**
@@ -34,6 +35,6 @@ class HelpMessageTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'form';
+        return FormType::class;
     }
 }
